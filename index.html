@@ -112,13 +112,13 @@ h2{font-size:18px;font-weight:500;color:var(--color-text-primary);margin-bottom:
 </div>
 
 <script>
-let items = JSON.parse(localStorage.getItem('kakeibu')||'[]');
+let items = JSON.parse(localStorage.getItem('kakeibo')||'[]');
 let filter = 'all';
 
 const today = new Date().toISOString().split('T')[0];
 document.getElementById('inp-date').value = today;
 
-function save(){localStorage.setItem('kakeibu',JSON.stringify(items))}
+function save(){localStorage.setItem('kakeibo',JSON.stringify(items))}
 
 function fmt(n){return '¥'+Number(n).toLocaleString('ja-JP')}
 
