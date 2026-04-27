@@ -48,6 +48,7 @@ h2{font-size:18px;font-weight:500;color:var(--color-text-primary);margin-bottom:
 .filter-row{display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap}
 .filter-btn{height:30px;padding:0 12px;border:0.5px solid var(--color-border-secondary);border-radius:999px;background:var(--color-background-primary);color:var(--color-text-secondary);font-size:13px;cursor:pointer}
 .filter-btn.active{background:var(--color-text-primary);color:var(--color-background-primary);border-color:var(--color-text-primary)}
+#inp-date{min-width:120px;max-width:120px;}
 </style>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9737379912380680"
@@ -80,7 +81,7 @@ h2{font-size:18px;font-weight:500;color:var(--color-text-primary);margin-bottom:
   </div>
 
   <div class="form-row">
-    <input type="date" id="inp-date">
+    <input type="date" id="inp-date" >
     <input type="text" id="inp-memo" placeholder="メモ（例：スーパー）" style="flex:2">
     <select id="inp-cat">
       <option value="食費">食費</option>
@@ -189,16 +190,16 @@ render();
       この家計簿アプリは、ブラウザ上で簡単に収入と支出を管理できる無料ツールです。
       アプリのインストールは不要で、スマホやパソコンからすぐに利用できます。
     </p>
+  </div>
 
+  <div style="flex:1; min-width:260px;">
     <h2>主な機能</h2>
     <ul>
       <li>収入・支出の簡単入力</li>
       <li>自動で合計・残高を計算</li>
-      <li>データはブラウザに保存されます</li>
+      <li>データはブラウザに保存されます</li><br>
     </ul>
-  </div>
 
-  <div style="flex:1; min-width:260px;">
     <h2>こんな人におすすめ</h2>
     <ul>
       <li>シンプルに家計管理をしたい人</li>
