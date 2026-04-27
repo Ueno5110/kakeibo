@@ -2,75 +2,133 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>使い方 | 家計簿アプリ</title>
+  <title>使い方｜シンプル家計簿アプリ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="シンプル家計簿アプリの使い方を詳しく解説します。収入・支出の入力方法からフィルター機能まで。">
   <style>
-    body{font-family:sans-serif;line-height:1.6;padding:20px;max-width:700px;margin:0 auto;}
-    h1{font-size:24px;margin-bottom:20px;}
-    h2{margin-top:24px;font-size:18px;}
-    p{margin:8px 0;}
-    ul{margin-left:20px;}
+    :root{
+      --color-text-primary:#222;
+      --color-text-secondary:#666;
+      --color-background-primary:#fff;
+      --color-background-secondary:#f5f5f5;
+      --color-border-secondary:#ddd;
+      --color-border-tertiary:#eee;
+      --color-green:#1D9E75;
+      --border-radius-md:8px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans JP",sans-serif;
+      color:var(--color-text-primary);
+      background:var(--color-background-primary);
+      font-size:15px;
+      line-height:1.7;
+    }
+    header{border-bottom:0.5px solid var(--color-border-tertiary);padding:0 20px;}
+    .header-inner{max-width:680px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:52px;}
+    .logo{font-size:15px;font-weight:600;text-decoration:none;color:var(--color-text-primary);}
+    nav{display:flex;gap:20px;}
+    nav a{font-size:13px;color:var(--color-text-secondary);text-decoration:none;}
+    nav a:hover{color:var(--color-text-primary);}
+    .wrap{max-width:680px;margin:0 auto;padding:40px 20px 80px;}
+    .page-title{font-size:22px;font-weight:600;margin-bottom:6px;}
+    .page-desc{font-size:13px;color:var(--color-text-secondary);margin-bottom:32px;}
+    .step{display:flex;gap:16px;margin-bottom:24px;}
+    .step-num{width:32px;height:32px;background:var(--color-green);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;flex-shrink:0;margin-top:2px;}
+    .step-body{}
+    .step-title{font-size:15px;font-weight:600;margin-bottom:6px;}
+    .step-desc{font-size:14px;color:#444;}
+    .step-list{margin:8px 0 0 0;padding-left:0;list-style:none;}
+    .step-list li{font-size:13px;color:var(--color-text-secondary);padding:4px 0;padding-left:14px;position:relative;}
+    .step-list li::before{content:"・";position:absolute;left:0;}
+    .divider{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:8px 0 24px;}
+    .note-box{background:#FFF8E1;border-left:3px solid #F9A825;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;padding:12px 16px;font-size:13px;color:#555;margin-top:8px;}
+    .back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--color-green);text-decoration:none;margin-top:8px;}
+    .back-btn:hover{opacity:0.8;}
+    footer{border-top:0.5px solid var(--color-border-tertiary);padding:20px;text-align:center;}
+    .footer-inner{max-width:680px;margin:0 auto;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+    footer a{font-size:12px;color:var(--color-text-secondary);text-decoration:none;}
+    footer a:hover{color:var(--color-text-primary);}
   </style>
 </head>
 <body>
+<header>
+  <div class="header-inner">
+    <a class="logo" href="index.html">📒 シンプル家計簿</a>
+    <nav>
+      <a href="howto.html">使い方</a>
+      <a href="about.html">about</a>
+      <a href="privacy.html">プライバシー</a>
+    </nav>
+  </div>
+</header>
 
-<h1>家計簿アプリの使い方</h1>
+<div class="wrap">
+  <div class="page-title">使い方</div>
+  <div class="page-desc">シンプルな操作で収支管理ができます。順番に確認してみてください。</div>
 
-<p>このアプリは、シンプルに収支を記録して日々の支出を管理するための家計簿ツールです。ログイン不要ですぐに使えます。</p>
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <div class="step-title">収支を入力する</div>
+      <div class="step-desc">画面上部のフォームに以下を入力して「追加」を押します。</div>
+      <ul class="step-list">
+        <li>日付：記録したい日を選択</li>
+        <li>メモ：内容（例：スーパー、ランチ）</li>
+        <li>カテゴリ：食費・交通費などを選択</li>
+        <li>金額：半角数字で入力</li>
+        <li>種別：「支出」または「収入」を選択</li>
+      </ul>
+    </div>
+  </div>
+  <hr class="divider">
 
-<h2>1. 収支を追加する</h2>
-<ul>
-  <li>日付：記録したい日を選択</li>
-  <li>メモ：内容（例：スーパー、ランチなど）</li>
-  <li>カテゴリ：食費・交通費などを選択</li>
-  <li>金額：金額を入力</li>
-  <li>種別：「支出」または「収入」を選択</li>
-</ul>
-<p>入力後、「追加」ボタンを押すと一覧に表示されます。</p>
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <div class="step-title">残高を確認する</div>
+      <div class="step-desc">収入合計・支出合計・残高が自動で計算され、上部のカードに表示されます。入力するたびにリアルタイムで更新されます。</div>
+    </div>
+  </div>
+  <hr class="divider">
 
-<h2>2. 一覧の見方</h2>
-<ul>
-  <li>日付ごとに表示されます</li>
-  <li>メモとカテゴリが表示されます</li>
-  <li>支出・収入は色で区別されます</li>
-  <li>不要なデータは削除できます</li>
-</ul>
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <div class="step-title">フィルターで絞り込む</div>
+      <div class="step-desc">一覧を「すべて」「収入のみ」「支出のみ」で切り替えて確認できます。</div>
+    </div>
+  </div>
+  <hr class="divider">
 
-<h2>3. フィルター機能</h2>
-<ul>
-  <li>すべて</li>
-  <li>収入のみ</li>
-  <li>支出のみ</li>
-</ul>
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-body">
+      <div class="step-title">不要なデータを削除する</div>
+      <div class="step-desc">一覧の右端にある「✕」ボタンを押すと、その項目を削除できます。</div>
+    </div>
+  </div>
+  <hr class="divider">
 
-<h2>4. 合計の確認</h2>
-<p>収入・支出・残高が自動で計算されます。</p>
+  <div class="step">
+    <div class="step-num">5</div>
+    <div class="step-body">
+      <div class="step-title">データの保存について</div>
+      <div class="step-desc">入力したデータはブラウザに自動保存されます。ページを閉じても次回開いたときに残っています。</div>
+      <div class="note-box">⚠️ ブラウザのキャッシュ・履歴を削除するとデータも消えます。また、別の端末とは共有されません。</div>
+    </div>
+  </div>
 
-<h2>5. データ保存について</h2>
-<p>データはブラウザに保存され、ページを閉じても保持されます。</p>
-<p>※別の端末とは共有されません</p>
+  <a class="back-btn" href="index.html">← アプリに戻る</a>
+</div>
 
-<h2>6. このアプリの特徴</h2>
-<ul>
-  <li>ログイン不要</li>
-  <li>シンプル操作</li>
-  <li>無料で利用可能</li>
-</ul>
-
-<h2>7. 注意事項</h2>
-<p>ブラウザのデータを削除すると記録も消えます。</p>
-
-<h2>8. おすすめの使い方</h2>
-<ul>
-  <li>毎日まとめて入力</li>
-  <li>カテゴリを統一</li>
-  <li>月末に振り返り</li>
-</ul>
-
-<hr>
-
-<p>
-  <a href="index.html">トップへ戻る</a>
-</p>
-
+<footer>
+  <div class="footer-inner">
+    <a href="index.html">ホーム</a>
+    <a href="howto.html">使い方</a>
+    <a href="about.html">このアプリについて</a>
+    <a href="privacy.html">プライバシーポリシー</a>
+  </div>
+</footer>
 </body>
 </html>
