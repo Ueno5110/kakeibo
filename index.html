@@ -6,66 +6,69 @@
   <title>無料のシンプル家計簿アプリ｜ブラウザで使える家計管理ツール</title>
   <meta name="description" content="ブラウザで簡単に使える無料の家計簿アプリ。収入・支出を記録して残高を自動計算。シンプルで使いやすい家計管理ツールです。">
   <meta name="google-site-verification" content="Vpejjgy2v8YnU3CpGv6LPKepcT5oreoE4VWVMny3xwI" />
-<style>
-  :root{
-  --color-text-primary:#222;
-  --color-text-secondary:#666;
-  --color-background-primary:#fff;
-  --color-background-secondary:#f5f5f5;
-  --color-border-secondary:#ddd;
-  --color-border-tertiary:#eee;
-  --border-radius-md:8px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans JP",sans-serif;
-}
-.wrap{padding:1rem 16px;max-width:680px;margin:0 auto;}
-h2{font-size:18px;font-weight:500;color:var(--color-text-primary);margin-bottom:1rem}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.5rem}
-.card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px 14px}
-.card-label{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px}
-.card-value{font-size:20px;font-weight:500;color:var(--color-text-primary)}
-.card-value.income{color:#1D9E75}
-.card-value.expense{color:#E24B4A}
-.card-value.balance{}
-.form-row{display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap}
-.form-row input,.form-row select{flex:1;min-width:100px;height:36px;padding:0 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);font-size:14px}
-.form-row input:focus,.form-row select:focus{outline:none;box-shadow:0 0 0 2px var(--color-border-secondary)}
-.btn{height:36px;padding:0 16px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);font-size:14px;cursor:pointer;white-space:nowrap}
-.btn:hover{background:var(--color-background-secondary)}
-.btn-add{background:#1D9E75;color:#fff;border-color:#1D9E75}
-.btn-add:hover{background:#0F6E56;border-color:#0F6E56}
-.list-header{display:grid;grid-template-columns:90px 1fr 80px 90px 36px;gap:8px;padding:6px 8px;font-size:12px;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:4px}
-.list-item{display:grid;grid-template-columns:90px 1fr 80px 90px 36px;gap:8px;align-items:center;padding:8px;border-radius:var(--border-radius-md);font-size:14px;margin-bottom:4px;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary)}
-.list-item:hover{background:var(--color-background-secondary)}
-.badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:500}
-.badge.income{background:#E1F5EE;color:#0F6E56}
-.badge.expense{background:#FCEBEB;color:#A32D2D}
-.amount.income{color:#1D9E75;font-weight:500}
-.amount.expense{color:#E24B4A;font-weight:500}
-.del-btn{width:28px;height:28px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);background:transparent;color:var(--color-text-secondary);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px}
-.del-btn:hover{background:#FCEBEB;color:#E24B4A;border-color:#F09595}
-.empty{text-align:center;padding:2rem;color:var(--color-text-secondary);font-size:14px}
-.filter-row{display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap}
-.filter-btn{height:30px;padding:0 12px;border:0.5px solid var(--color-border-secondary);border-radius:999px;background:var(--color-background-primary);color:var(--color-text-secondary);font-size:13px;cursor:pointer}
-.filter-btn.active{background:var(--color-text-primary);color:var(--color-background-primary);border-color:var(--color-text-primary)}
-#inp-date{min-width:120px;max-width:120px;}
-</style>
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9737379912380680"
-     crossorigin="anonymous"></script>
+  <style>
+    :root{
+      --color-text-primary:#222;
+      --color-text-secondary:#666;
+      --color-background-primary:#fff;
+      --color-background-secondary:#f5f5f5;
+      --color-border-secondary:#ddd;
+      --color-border-tertiary:#eee;
+      --border-radius-md:8px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans JP",sans-serif;
+    }
+    .wrap{padding:1rem 16px;max-width:680px;margin:0 auto;}
+    h2{font-size:18px;font-weight:500;color:var(--color-text-primary);margin-bottom:1rem}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.5rem}
+    .card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px 14px}
+    .card-label{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px}
+    .card-value{font-size:20px;font-weight:500;color:var(--color-text-primary)}
+    .card-value.income{color:#1D9E75}
+    .card-value.expense{color:#E24B4A}
+    .form-row{display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap}
+    .form-row input,.form-row select{flex:1;min-width:100px;height:36px;padding:0 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);font-size:14px}
+    .form-row input:focus,.form-row select:focus{outline:none;box-shadow:0 0 0 2px var(--color-border-secondary)}
+    .btn{height:36px;padding:0 16px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);font-size:14px;cursor:pointer;white-space:nowrap}
+    .btn:hover{background:var(--color-background-secondary)}
+    .btn-add{background:#1D9E75;color:#fff;border-color:#1D9E75}
+    .btn-add:hover{background:#0F6E56;border-color:#0F6E56}
+    .list-header{display:grid;grid-template-columns:90px 1fr 80px 90px 36px;gap:8px;padding:6px 8px;font-size:12px;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:4px}
+    .list-item{display:grid;grid-template-columns:90px 1fr 80px 90px 36px;gap:8px;align-items:center;padding:8px;border-radius:var(--border-radius-md);font-size:14px;margin-bottom:4px;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary)}
+    .list-item:hover{background:var(--color-background-secondary)}
+    .badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:500}
+    .badge.income{background:#E1F5EE;color:#0F6E56}
+    .badge.expense{background:#FCEBEB;color:#A32D2D}
+    .amount.income{color:#1D9E75;font-weight:500}
+    .amount.expense{color:#E24B4A;font-weight:500}
+    .del-btn{width:28px;height:28px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);background:transparent;color:var(--color-text-secondary);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px}
+    .del-btn:hover{background:#FCEBEB;color:#E24B4A;border-color:#F09595}
+    .empty{text-align:center;padding:2rem;color:var(--color-text-secondary);font-size:14px}
+    .filter-row{display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap}
+    .filter-btn{height:30px;padding:0 12px;border:0.5px solid var(--color-border-secondary);border-radius:999px;background:var(--color-background-primary);color:var(--color-text-secondary);font-size:13px;cursor:pointer}
+    .filter-btn.active{background:var(--color-text-primary);color:var(--color-background-primary);border-color:var(--color-text-primary)}
+    #inp-date{min-width:120px;max-width:120px;}
+    .info-section{display:flex;gap:40px;flex-wrap:wrap;margin-top:30px;padding-top:24px;border-top:0.5px solid var(--color-border-tertiary);}
+    .info-block{flex:1;min-width:200px;}
+    .info-block h2{font-size:15px;margin-bottom:8px;}
+    .info-block p,.info-block li{font-size:13px;color:var(--color-text-secondary);line-height:1.7;}
+    .info-block ul{padding-left:16px;margin-bottom:12px;}
+    .site-footer{margin-top:30px;padding:20px 0;text-align:center;border-top:0.5px solid var(--color-border-tertiary);}
+    .site-footer a{font-size:12px;color:var(--color-text-secondary);text-decoration:none;margin:0 8px;}
+    .site-footer a:hover{color:var(--color-text-primary);}
+  </style>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9737379912380680" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="wrap">
-<h1 style="font-size:20px;margin-bottom:8px;">シンプル家計簿アプリ</h1>
-  <p style="font-size:13px;color:#666;margin-bottom:12px;">
-ブラウザだけで簡単に収支管理ができる無料の家計簿ツールです。
-</p>
-  <p style="font-size:12px;color:#666;">
-※データはブラウザ内に保存されます（外部送信なし）
-</p>
-<h2>家計簿</h2>
+
+  <h1 style="font-size:20px;margin-bottom:8px;">シンプル家計簿アプリ</h1>
+  <p style="font-size:13px;color:#666;margin-bottom:8px;">ブラウザだけで簡単に収支管理ができる無料の家計簿ツールです。</p>
+  <p style="font-size:12px;color:#666;margin-bottom:20px;">※データはブラウザ内に保存されます（外部送信なし）</p>
+
+  <h2>家計簿</h2>
 
   <div class="cards">
     <div class="card">
@@ -83,7 +86,7 @@ h2{font-size:18px;font-weight:500;color:var(--color-text-primary);margin-bottom:
   </div>
 
   <div class="form-row">
-    <input type="date" id="inp-date" >
+    <input type="date" id="inp-date">
     <input type="text" id="inp-memo" placeholder="メモ（例：スーパー）" style="flex:2">
     <select id="inp-cat">
       <option value="食費">食費</option>
@@ -112,6 +115,34 @@ h2{font-size:18px;font-weight:500;color:var(--color-text-primary);margin-bottom:
     <span>日付</span><span>メモ・カテゴリ</span><span>種別</span><span style="text-align:right">金額</span><span></span>
   </div>
   <div id="list"></div>
+
+  <div class="info-section">
+    <div class="info-block">
+      <h2>この家計簿アプリについて</h2>
+      <p>ブラウザ上で簡単に収入と支出を管理できる無料ツールです。インストール不要で、スマホやパソコンからすぐに利用できます。</p>
+    </div>
+    <div class="info-block">
+      <h2>主な機能</h2>
+      <ul>
+        <li>収入・支出の簡単入力</li>
+        <li>自動で合計・残高を計算</li>
+        <li>データはブラウザに保存</li>
+      </ul>
+      <h2>こんな人におすすめ</h2>
+      <ul>
+        <li>シンプルに家計管理をしたい人</li>
+        <li>アプリのインストールが面倒な人</li>
+        <li>すぐに使いたい人</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="site-footer">
+    <a href="howto.html">使い方</a>
+    <a href="about.html">このアプリについて</a>
+    <a href="privacy.html">プライバシーポリシー</a>
+  </div>
+
 </div>
 
 <script>
@@ -184,37 +215,5 @@ function render(){
 
 render();
 </script>
-<div style="margin-top:30px; display:flex; gap:40px; flex-wrap:wrap; font-size:14px; line-height:1.6; color:#444; justify-content:center; max-width:700px; margin-left:auto; margin-right:auto; padding:0 16px;">
-
-  <div style="flex:1; min-width:260px;">
-    <h2>この家計簿アプリについて</h2>
-    <p>
-      この家計簿アプリは、ブラウザ上で簡単に収入と支出を管理できる無料ツールです。
-      アプリのインストールは不要で、スマホやパソコンからすぐに利用できます。
-    </p>
-  </div>
-
-  <div style="flex:1; min-width:260px;">
-    <h2>主な機能</h2>
-    <ul>
-      <li>収入・支出の簡単入力</li>
-      <li>自動で合計・残高を計算</li>
-      <li>データはブラウザに保存されます</li><br>
-    </ul>
-
-    <h2>こんな人におすすめ</h2>
-    <ul>
-      <li>シンプルに家計管理をしたい人</li>
-      <li>アプリのインストールが面倒な人</li>
-      <li>すぐに使いたい人</li>
-    </ul>
-  </div>
-  </div>
-
-<div style="text-align:center; margin-top:30px; padding:20px 0; font-size:12px; color:#666;">
-  <a href="howto.html">使い方</a> |
-  <a href="about.html">このアプリについて</a> |
-  <a href="privacy.html">プライバシーポリシー</a>
-</div>
 </body>
 </html>
