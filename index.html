@@ -65,26 +65,42 @@
     .month-label{font-size:15px;font-weight:600;color:var(--color-text-primary);}
     .month-today-btn{font-size:12px;color:#1D9E75;border:0.5px solid #1D9E75;border-radius:999px;padding:3px 10px;background:transparent;cursor:pointer;}
     .month-today-btn:hover{background:#E1F5EE;}
+
+    /* 円グラフ */
+    .chart-section{margin-bottom:1.5rem;}
+    .chart-inner{display:flex;align-items:center;gap:24px;flex-wrap:wrap;justify-content:center;}
+    .chart-wrap{position:relative;width:140px;height:140px;flex-shrink:0;}
+    .chart-wrap canvas{width:140px !important;height:140px !important;}
+    .chart-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;}
+    .chart-center-label{font-size:11px;color:var(--color-text-secondary);}
+    .chart-center-value{font-size:14px;font-weight:600;color:#E24B4A;}
+    .chart-legend{display:flex;flex-direction:column;gap:6px;flex:1;min-width:160px;}
+    .legend-item{display:flex;align-items:center;gap:8px;font-size:13px;}
+    .legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+    .legend-name{flex:1;color:var(--color-text-primary);}
+    .legend-amount{font-weight:500;color:var(--color-text-primary);}
+    .legend-pct{font-size:11px;color:var(--color-text-secondary);margin-left:4px;}
+    .chart-empty{text-align:center;padding:1.5rem;color:var(--color-text-secondary);font-size:13px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);}
   </style>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9737379912380680" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="wrap">
 
-  <h1 style="font-size:20px;margin-bottom:8px;">シンプル家計簿アプリ</h1>
+  <h1 style="font-size:20px;margin-bottom:8px;">シンプル家計簿アプリ グラフ追加テスト</h1>
   <p style="font-size:13px;color:#666;margin-bottom:8px;">ブラウザだけで簡単に収支管理ができる無料の家計簿ツールです。</p>
   <p style="font-size:12px;color:#666;margin-bottom:20px;">※データはブラウザ内に保存されます（外部送信なし）</p>
 
-<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
-  <h2 style="margin-bottom:0;">家計簿</h2>
-  <button class="month-today-btn" onclick="goToToday()">今月に戻る</button>
-</div>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+    <h2 style="margin-bottom:0;">家計簿</h2>
+    <button class="month-today-btn" onclick="goToToday()">今月に戻る</button>
+  </div>
 
-<div class="month-nav">
-  <button class="month-nav-btn" onclick="changeMonth(-1)">‹</button>
-  <span class="month-label" id="month-label"></span>
-  <button class="month-nav-btn" onclick="changeMonth(1)">›</button>
-</div>
+  <div class="month-nav">
+    <button class="month-nav-btn" onclick="changeMonth(-1)">‹</button>
+    <span class="month-label" id="month-label"></span>
+    <button class="month-nav-btn" onclick="changeMonth(1)">›</button>
+  </div>
 
   <div class="cards">
     <div class="card">
@@ -99,6 +115,12 @@
       <div class="card-label">残高</div>
       <div class="card-value balance" id="total-balance">¥0</div>
     </div>
+  </div>
+
+  <!-- 円グラフ -->
+  <div class="chart-section">
+    <div style="font-size:13px;font-weight:600;color:var(--color-text-secondary);margin-bottom:8px;">支出の内訳</div>
+    <div id="chart-area"></div>
   </div>
 
   <div class="form-row">
@@ -144,6 +166,7 @@
       <ul>
         <li>収入・支出の簡単入力</li>
         <li>月別に収支を確認</li>
+        <li>カテゴリ別の円グラフ表示</li>
         <li>自動で合計・残高を計算</li>
         <li>データはブラウザに保存</li>
       </ul>
@@ -173,6 +196,20 @@ let currentYear = today.getFullYear();
 let currentMonth = today.getMonth() + 1;
 
 document.getElementById('inp-date').value = today.toISOString().split('T')[0];
+
+// カテゴリカラーパレット
+const CAT_COLORS = {
+  '食費':     '#FF6B6B',
+  '交通費':   '#4ECDC4',
+  '光熱費':   '#FFD93D',
+  '娯楽':     '#6C63FF',
+  '医療':     '#FF9F43',
+  '給与':     '#1D9E75',
+  'その他':   '#A0AEC0',
+};
+function getCatColor(cat){
+  return CAT_COLORS[cat] || '#A0AEC0';
+}
 
 function save(){localStorage.setItem('kakeibo',JSON.stringify(items))}
 function fmt(n){return '¥'+Number(n).toLocaleString('ja-JP')}
@@ -238,6 +275,73 @@ function setFilter(f,el){
   render();
 }
 
+// 円グラフ描画
+function renderChart(monthItems){
+  const chartArea = document.getElementById('chart-area');
+  const expenses = monthItems.filter(i=>i.type==='expense');
+  const total = expenses.reduce((s,i)=>s+i.amount,0);
+
+  if(total===0){
+    chartArea.innerHTML='<div class="chart-empty">支出データがありません</div>';
+    return;
+  }
+
+  // カテゴリ別に集計
+  const catMap = {};
+  expenses.forEach(i=>{
+    catMap[i.cat] = (catMap[i.cat]||0) + i.amount;
+  });
+  const cats = Object.entries(catMap).sort((a,b)=>b[1]-a[1]);
+
+  // Canvas で円グラフ描画
+  chartArea.innerHTML = `
+    <div class="chart-inner">
+      <div class="chart-wrap">
+        <canvas id="pie-canvas" width="140" height="140"></canvas>
+        <div class="chart-center">
+          <div class="chart-center-label">支出合計</div>
+          <div class="chart-center-value">${fmt(total)}</div>
+        </div>
+      </div>
+      <div class="chart-legend" id="chart-legend"></div>
+    </div>
+  `;
+
+  // 凡例
+  const legend = document.getElementById('chart-legend');
+  legend.innerHTML = cats.map(([cat, amt])=>`
+    <div class="legend-item">
+      <div class="legend-dot" style="background:${getCatColor(cat)}"></div>
+      <span class="legend-name">${cat}</span>
+      <span class="legend-amount">${fmt(amt)}</span>
+      <span class="legend-pct">${Math.round(amt/total*100)}%</span>
+    </div>
+  `).join('');
+
+  // Canvas 描画
+  const canvas = document.getElementById('pie-canvas');
+  const ctx = canvas.getContext('2d');
+  const cx = 70, cy = 70, r = 60, innerR = 36;
+  let startAngle = -Math.PI / 2;
+
+  cats.forEach(([cat, amt])=>{
+    const slice = (amt / total) * 2 * Math.PI;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, r, startAngle, startAngle + slice);
+    ctx.closePath();
+    ctx.fillStyle = getCatColor(cat);
+    ctx.fill();
+    startAngle += slice;
+  });
+
+  // 中央の穴（ドーナツ型）
+  ctx.beginPath();
+  ctx.arc(cx, cy, innerR, 0, 2 * Math.PI);
+  ctx.fillStyle = '#ffffff';
+  ctx.fill();
+}
+
 function render(){
   const monthItems=getMonthItems();
   const filtered=filter==='all'?monthItems:monthItems.filter(i=>i.type===filter);
@@ -249,6 +353,10 @@ function render(){
   const balEl=document.getElementById('total-balance');
   balEl.textContent=fmt(balance);
   balEl.style.color=balance>=0?'#1D9E75':'#E24B4A';
+
+  // 円グラフ描画
+  renderChart(monthItems);
+
   const list=document.getElementById('list');
   if(filtered.length===0){
     list.innerHTML='<div class="empty">この月のデータはありません。</div>';
