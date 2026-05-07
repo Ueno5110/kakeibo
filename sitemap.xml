@@ -20,4 +20,9 @@
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
+  <url>
+  <loc>https://kakeibo-khaki.vercel.app/fixedcost.html</loc>
+  <changefreq>yearly</changefreq>
+  <priority>0.5</priority>
+</url>
 </urlset>
