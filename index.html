@@ -156,9 +156,12 @@
   <div id="alert-area"></div>
 
   <div class="budget-panel">
-    <div class="budget-panel-header" onclick="toggleBudgetPanel()">
-      <span class="budget-panel-title">⚙️ 予算設定（任意）</span>
-      <span class="budget-panel-toggle" id="budget-toggle-label">開く ▼</span>
+    <div class="budget-panel-header">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span class="budget-panel-title" onclick="toggleBudgetPanel()" style="cursor:pointer;">⚙️ 予算設定（任意）</span>
+        <a href="fixedcost.html" style="font-size:12px;color:#1D9E75;text-decoration:none;font-weight:600;">🔁 固定費設定</a>
+      </div>
+      <span class="budget-panel-toggle" id="budget-toggle-label" onclick="toggleBudgetPanel()" style="cursor:pointer;">開く ▼</span>
     </div>
     <div class="budget-panel-body" id="budget-panel-body">
       <div class="budget-row">
