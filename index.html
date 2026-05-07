@@ -65,8 +65,6 @@
     .month-label{font-size:15px;font-weight:600;color:var(--color-text-primary);}
     .month-today-btn{font-size:12px;color:#1D9E75;border:0.5px solid #1D9E75;border-radius:999px;padding:3px 10px;background:transparent;cursor:pointer;}
     .month-today-btn:hover{background:#E1F5EE;}
-
-    /* 円グラフ */
     .chart-section{margin-bottom:1.5rem;display:flex;flex-direction:column;align-items:center;}
     .chart-inner{display:flex;flex-direction:column;align-items:center;gap:16px;}
     .chart-wrap{position:relative;width:140px;height:140px;flex-shrink:0;}
@@ -81,8 +79,6 @@
     .legend-amount{font-weight:500;color:var(--color-text-primary);}
     .legend-pct{font-size:11px;color:var(--color-text-secondary);margin-left:4px;}
     .chart-empty{text-align:center;padding:1.5rem;color:var(--color-text-secondary);font-size:13px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);width:100%;}
-
-    /* 予算 */
     .budget-bar-wrap{height:6px;background:var(--color-border-secondary);border-radius:999px;margin-top:6px;overflow:hidden;}
     .budget-bar{height:6px;border-radius:999px;transition:width .3s;}
     .budget-bar.ok{background:#1D9E75;}
@@ -92,14 +88,10 @@
     .card-budget.ok{color:#1D9E75;}
     .card-budget.warn{color:#F0A04B;}
     .card-budget.over{color:#E24B4A;font-weight:600;}
-
-    /* アラートボックス */
     .alert-box{border-radius:var(--border-radius-md);padding:10px 14px;font-size:13px;margin-bottom:12px;display:flex;align-items:flex-start;gap:8px;}
     .alert-box.warn{background:#FFF8E1;border:0.5px solid #F0A04B;color:#7a5000;}
     .alert-box.over{background:#FEECEC;border:0.5px solid #E24B4A;color:#7a1a1a;}
     .alert-icon{font-size:16px;flex-shrink:0;}
-
-    /* 予算設定パネル */
     .budget-panel{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:14px 16px;margin-bottom:1.2rem;}
     .budget-panel-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;}
     .budget-panel-title{font-size:13px;font-weight:600;color:var(--color-text-secondary);}
@@ -113,8 +105,8 @@
     .budget-save-btn:hover{background:#0F6E56;}
     .budget-clear-btn{height:32px;padding:0 14px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-secondary);font-size:13px;cursor:pointer;margin-top:4px;}
     .budget-clear-btn:hover{background:var(--color-border-secondary);}
-
-    @media (max-width: 480px) {
+    .fixed-notice{background:#E1F5EE;border-radius:var(--border-radius-md);padding:10px 14px;font-size:13px;color:#0F6E56;margin-bottom:12px;display:none;}
+    @media(max-width:480px){
       .list-header{grid-template-columns:72px 1fr 52px 72px 28px;font-size:11px;}
       .list-item{grid-template-columns:72px 1fr 52px 72px 28px;font-size:12px;}
     }
@@ -127,6 +119,9 @@
   <h1 style="font-size:20px;margin-bottom:8px;">シンプル家計簿アプリ</h1>
   <p style="font-size:13px;color:#666;margin-bottom:8px;">ブラウザだけで簡単に収支管理ができる無料の家計簿ツールです。</p>
   <p style="font-size:12px;color:#666;margin-bottom:20px;">※データはブラウザ内に保存されます（外部送信なし）</p>
+
+  <!-- 固定費追加通知 -->
+  <div class="fixed-notice" id="fixed-notice"></div>
 
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
     <h2 style="margin-bottom:0;">家計簿</h2>
@@ -145,7 +140,7 @@
       <div class="card-value income" id="total-income">¥0</div>
     </div>
     <div class="card">
-      <div class="card-label">支出合計</div>
+      <div class="card-label">支出合計（<span id="num-of-expenditures">0</span>件）</div>
       <div class="card-value expense" id="total-expense">¥0</div>
       <div class="card-budget" id="budget-total-label"></div>
       <div class="budget-bar-wrap" id="budget-total-bar-wrap" style="display:none;">
@@ -158,10 +153,8 @@
     </div>
   </div>
 
-  <!-- アラートエリア -->
   <div id="alert-area"></div>
 
-  <!-- 予算設定パネル -->
   <div class="budget-panel">
     <div class="budget-panel-header" onclick="toggleBudgetPanel()">
       <span class="budget-panel-title">⚙️ 予算設定（任意）</span>
@@ -182,7 +175,6 @@
     </div>
   </div>
 
-  <!-- 円グラフ -->
   <div class="chart-section">
     <div style="font-size:13px;font-weight:600;color:var(--color-text-secondary);margin-bottom:8px;">支出の内訳</div>
     <div id="chart-area"></div>
@@ -233,6 +225,7 @@
         <li>月別に収支を確認</li>
         <li>カテゴリ別の円グラフ表示</li>
         <li>予算設定・超過アラート</li>
+        <li>固定費の自動追加</li>
         <li>自動で合計・残高を計算</li>
         <li>データはブラウザに保存</li>
       </ul>
@@ -246,6 +239,7 @@
   </div>
 
   <div class="site-footer">
+    <a href="fixedcost.html">固定費設定</a>
     <a href="howto.html">使い方</a>
     <a href="about.html">このアプリについて</a>
     <a href="privacy.html">プライバシーポリシー</a>
@@ -261,9 +255,9 @@ const CAT_COLORS = {
 };
 function getCatColor(cat){return CAT_COLORS[cat]||'#A0AEC0';}
 
-let items   = JSON.parse(localStorage.getItem('kakeibo')||'[]');
-let budgets = JSON.parse(localStorage.getItem('kakeibo_budgets')||'{}');
-// budgets = { total: 50000, cats: { '食費': 10000, ... } }
+let items      = JSON.parse(localStorage.getItem('kakeibo')||'[]');
+let budgets    = JSON.parse(localStorage.getItem('kakeibo_budgets')||'{}');
+let fixedCosts = JSON.parse(localStorage.getItem('kakeibo_fixed')||'[]');
 
 let filter = 'all';
 const today = new Date();
@@ -275,6 +269,58 @@ document.getElementById('inp-date').value = today.toISOString().split('T')[0];
 function save(){ localStorage.setItem('kakeibo', JSON.stringify(items)); }
 function saveBudgetData(){ localStorage.setItem('kakeibo_budgets', JSON.stringify(budgets)); }
 function fmt(n){ return '¥'+Number(n).toLocaleString('ja-JP'); }
+
+/* ── 固定費の自動追加 ── */
+function applyFixedCosts(){
+  if(fixedCosts.length === 0) return;
+
+  const now = new Date();
+  const year  = now.getFullYear();
+  const month = now.getMonth() + 1;
+  const todayDay = now.getDate();
+
+  const added = [];
+
+  fixedCosts.forEach(f => {
+    // 指定日を過ぎているか確認
+    if(todayDay < f.day) return;
+
+    // 今月の指定日付を作成（例：2026-05-25）
+    const dateStr = `${year}-${String(month).padStart(2,'0')}-${String(f.day).padStart(2,'0')}`;
+
+    // 今月すでに同じ固定費が追加済みか確認
+    const alreadyAdded = items.some(i =>
+      i.date === dateStr &&
+      i.memo === f.name &&
+      i.cat  === f.cat  &&
+      i.amount === f.amount &&
+      i.type === f.type &&
+      i.isFixed === true
+    );
+
+    if(!alreadyAdded){
+      items.unshift({
+        id: Date.now() + Math.random(),
+        date: dateStr,
+        memo: f.name,
+        cat:  f.cat,
+        amount: f.amount,
+        type: f.type,
+        isFixed: true  // 固定費フラグ
+      });
+      added.push(f.name);
+    }
+  });
+
+  if(added.length > 0){
+    save();
+    // 追加通知を表示
+    const notice = document.getElementById('fixed-notice');
+    notice.textContent = `✅ 固定費を自動追加しました：${added.join('・')}`;
+    notice.style.display = 'block';
+    setTimeout(()=>{ notice.style.display='none'; }, 4000);
+  }
+}
 
 /* ── 月ナビ ── */
 function updateMonthLabel(){
@@ -305,7 +351,6 @@ function toggleBudgetPanel(){
   label.textContent = isOpen ? '閉じる ▲' : '開く ▼';
   if(isOpen) renderBudgetInputs();
 }
-
 function renderBudgetInputs(){
   document.getElementById('budget-total-input').value = budgets.total || '';
   const catRows = document.getElementById('budget-cat-rows');
@@ -318,7 +363,6 @@ function renderBudgetInputs(){
     </div>
   `).join('');
 }
-
 function saveBudget(){
   const total = parseInt(document.getElementById('budget-total-input').value)||null;
   const cats = {};
@@ -331,7 +375,6 @@ function saveBudget(){
   toggleBudgetPanel();
   render();
 }
-
 function clearBudget(){
   budgets = {};
   saveBudgetData();
@@ -339,16 +382,13 @@ function clearBudget(){
   render();
 }
 
-/* ── アラート・予算バー描画 ── */
+/* ── 予算バー・アラート ── */
 function renderBudgetUI(monthItems){
   const expense = monthItems.filter(i=>i.type==='expense').reduce((s,i)=>s+i.amount,0);
-
-  // 月全体の予算バー
   const totalBudget = budgets.total || null;
   const barWrap = document.getElementById('budget-total-bar-wrap');
   const barEl   = document.getElementById('budget-total-bar');
   const labelEl = document.getElementById('budget-total-label');
-
   if(totalBudget){
     const pct = Math.min(expense/totalBudget*100, 100);
     const remaining = totalBudget - expense;
@@ -364,23 +404,15 @@ function renderBudgetUI(monthItems){
     barWrap.style.display='none';
     labelEl.textContent='';
   }
-
-  // アラートボックス
   const alerts=[];
-
-  // 月全体の超過チェック
   if(totalBudget && expense>totalBudget){
     alerts.push({type:'over', msg:`今月の支出が予算を超過しています（${fmt(expense)} / ${fmt(totalBudget)}）`});
   } else if(totalBudget && expense/totalBudget>=0.8){
     alerts.push({type:'warn', msg:`今月の支出が予算の80%を超えました（残り ${fmt(totalBudget-expense)}）`});
   }
-
-  // カテゴリ別の超過チェック
   if(budgets.cats){
     const catExp={};
-    monthItems.filter(i=>i.type==='expense').forEach(i=>{
-      catExp[i.cat]=(catExp[i.cat]||0)+i.amount;
-    });
+    monthItems.filter(i=>i.type==='expense').forEach(i=>{ catExp[i.cat]=(catExp[i.cat]||0)+i.amount; });
     Object.entries(budgets.cats).forEach(([cat, budget])=>{
       const exp = catExp[cat]||0;
       if(exp>budget){
@@ -390,9 +422,7 @@ function renderBudgetUI(monthItems){
       }
     });
   }
-
-  const alertArea = document.getElementById('alert-area');
-  alertArea.innerHTML = alerts.map(a=>`
+  document.getElementById('alert-area').innerHTML = alerts.map(a=>`
     <div class="alert-box ${a.type}">
       <span class="alert-icon">${a.type==='over'?'🔴':'⚠️'}</span>
       <span>${a.msg}</span>
@@ -400,7 +430,7 @@ function renderBudgetUI(monthItems){
   `).join('');
 }
 
-/* ── 円グラフ描画 ── */
+/* ── 円グラフ ── */
 function renderChart(monthItems){
   const chartArea=document.getElementById('chart-area');
   const expenses=monthItems.filter(i=>i.type==='expense');
@@ -491,6 +521,9 @@ function render(){
   balEl.textContent=fmt(balance);
   balEl.style.color=balance>=0?'#1D9E75':'#E24B4A';
 
+  const expCount=monthItems.filter(i=>i.type==='expense').length;
+  document.getElementById('num-of-expenditures').textContent=expCount;
+
   renderBudgetUI(monthItems);
   renderChart(monthItems);
 
@@ -502,7 +535,11 @@ function render(){
   list.innerHTML=filtered.map(i=>`
     <div class="list-item">
       <span style="font-size:13px;color:var(--color-text-secondary)">${i.date}</span>
-      <span><span style="font-size:13px">${i.memo}</span><span style="font-size:11px;color:var(--color-text-secondary);margin-left:6px">${i.cat}</span></span>
+      <span>
+        <span style="font-size:13px">${i.memo}</span>
+        <span style="font-size:11px;color:var(--color-text-secondary);margin-left:6px">${i.cat}</span>
+        ${i.isFixed ? '<span style="font-size:10px;color:#1D9E75;margin-left:4px;">🔁固定</span>' : ''}
+      </span>
       <span><span class="badge ${i.type}">${i.type==='income'?'収入':'支出'}</span></span>
       <span class="amount ${i.type}" style="text-align:right">${fmt(i.amount)}</span>
       <button class="del-btn" onclick="deleteItem(${i.id})">✕</button>
@@ -510,6 +547,8 @@ function render(){
   `).join('');
 }
 
+// 起動時に固定費を自動追加してから描画
+applyFixedCosts();
 updateMonthLabel();
 render();
 </script>
