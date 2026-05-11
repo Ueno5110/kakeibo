@@ -17,9 +17,7 @@
       --border-radius-md:8px;
     }
     *{box-sizing:border-box;margin:0;padding:0}
-    body{
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans JP",sans-serif;
-    }
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans JP",sans-serif;}
     .wrap{padding:1rem 16px;max-width:680px;margin:0 auto;}
     h2{font-size:18px;font-weight:500;color:var(--color-text-primary);margin-bottom:1rem}
     .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1rem}
@@ -106,12 +104,8 @@
     .budget-clear-btn{height:32px;padding:0 14px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-secondary);font-size:13px;cursor:pointer;margin-top:4px;}
     .budget-clear-btn:hover{background:var(--color-border-secondary);}
     .fixed-notice{background:#E1F5EE;border-radius:var(--border-radius-md);padding:10px 14px;font-size:13px;color:#0F6E56;margin-bottom:12px;display:none;}
-
-    /* CSVエクスポート */
-    .csv-btn{height:28px;padding:0 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:#1D9E75;border:0.5px solid #1D9E75;font-size:12px;cursor:pointer;white-space:nowrap;}
-    .csv-btn:hover{background:#E1F5EE;}
-
-    /* CSVモーダル */
+    .csv-btn{height:28px;padding:0 10px;border:0.5px solid #1D9E75;border-radius:var(--border-radius-md);background:#1D9E75;color:#fff;font-size:12px;cursor:pointer;white-space:nowrap;font-weight:600;}
+    .csv-btn:hover{background:#0F6E56;}
     .modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);display:none;align-items:center;justify-content:center;z-index:100;}
     .modal-overlay.open{display:flex;}
     .modal{background:var(--color-background-primary);border-radius:var(--border-radius-md);padding:24px;width:90%;max-width:340px;}
@@ -120,7 +114,6 @@
     .modal-btn:hover{background:var(--color-border-secondary);}
     .modal-cancel{display:block;width:100%;height:36px;border:none;background:transparent;color:var(--color-text-secondary);font-size:13px;cursor:pointer;margin-top:4px;}
     .modal-cancel:hover{color:var(--color-text-primary);}
-
     @media(max-width:480px){
       .list-header{grid-template-columns:72px 1fr 52px 72px 28px;font-size:11px;}
       .list-item{grid-template-columns:72px 1fr 52px 72px 28px;font-size:12px;}
@@ -130,7 +123,6 @@
 </head>
 <body>
 
-<!-- CSVエクスポート選択モーダル -->
 <div class="modal-overlay" id="csv-modal">
   <div class="modal">
     <div class="modal-title">📥 CSVエクスポート</div>
@@ -188,6 +180,7 @@
       <div style="display:flex;align-items:center;gap:12px;">
         <span class="budget-panel-title" onclick="toggleBudgetPanel()">⚙️ 予算設定（任意）</span>
         <a href="fixedcost.html" style="font-size:12px;color:#1D9E75;text-decoration:none;font-weight:600;">🔁 固定費設定</a>
+        <a href="category.html" style="font-size:12px;color:#1D9E75;text-decoration:none;font-weight:600;">🏷️ カテゴリ設定</a>
       </div>
       <span class="budget-panel-toggle" id="budget-toggle-label" onclick="toggleBudgetPanel()">開く ▼</span>
     </div>
@@ -214,15 +207,7 @@
   <div class="form-row">
     <input type="date" id="inp-date">
     <input type="text" id="inp-memo" placeholder="メモ（例：スーパー）" style="flex:2">
-    <select id="inp-cat">
-      <option value="食費">食費</option>
-      <option value="交通費">交通費</option>
-      <option value="光熱費">光熱費</option>
-      <option value="娯楽">娯楽</option>
-      <option value="医療">医療</option>
-      <option value="給与">給与</option>
-      <option value="その他">その他</option>
-    </select>
+    <select id="inp-cat"></select>
     <input type="number" id="inp-amount" placeholder="金額" min="0" style="max-width:120px">
     <select id="inp-type">
       <option value="expense">支出</option>
@@ -258,6 +243,7 @@
         <li>予算設定・超過アラート</li>
         <li>固定費の自動追加</li>
         <li>CSVエクスポート</li>
+        <li>カテゴリの追加・編集・削除</li>
         <li>データはブラウザに保存</li>
       </ul>
       <h2>こんな人におすすめ</h2>
@@ -271,6 +257,7 @@
 
   <div class="site-footer">
     <a href="fixedcost.html">固定費設定</a>
+    <a href="category.html">カテゴリ設定</a>
     <a href="howto.html">使い方</a>
     <a href="about.html">このアプリについて</a>
     <a href="privacy.html">プライバシーポリシー</a>
@@ -279,12 +266,30 @@
 </div>
 
 <script>
-const CATS = ['食費','交通費','光熱費','娯楽','医療','給与','その他'];
+const DEFAULT_CATS = ['食費','交通費','光熱費','娯楽','医療','給与','その他'];
 const CAT_COLORS = {
   '食費':'#FF6B6B','交通費':'#4ECDC4','光熱費':'#FFD93D',
   '娯楽':'#6C63FF','医療':'#FF9F43','給与':'#1D9E75','その他':'#A0AEC0',
 };
-function getCatColor(cat){return CAT_COLORS[cat]||'#A0AEC0';}
+const COLOR_POOL = ['#FF6B6B','#4ECDC4','#FFD93D','#6C63FF','#FF9F43','#1D9E75','#A0AEC0','#F06292','#4DB6AC','#FFB74D'];
+function getCatColor(cat, index){
+  return CAT_COLORS[cat] || COLOR_POOL[index % COLOR_POOL.length];
+}
+
+// カテゴリをlocalStorageから取得
+let catsData = JSON.parse(localStorage.getItem('kakeibo_cats') || 'null');
+if(!catsData){
+  catsData = DEFAULT_CATS.map(name => ({ id: Date.now() + Math.random(), name, isDefault: true }));
+  localStorage.setItem('kakeibo_cats', JSON.stringify(catsData));
+}
+// カテゴリ名の配列を取得
+function getCatNames(){ return catsData.map(c => c.name); }
+
+// カテゴリセレクトを動的に生成
+function renderCatSelect(){
+  const sel = document.getElementById('inp-cat');
+  sel.innerHTML = getCatNames().map(name => `<option value="${name}">${name}</option>`).join('');
+}
 
 let items      = JSON.parse(localStorage.getItem('kakeibo')||'[]');
 let budgets    = JSON.parse(localStorage.getItem('kakeibo_budgets')||'{}');
@@ -304,83 +309,46 @@ function fmt(n){ return '¥'+Number(n).toLocaleString('ja-JP'); }
 /* ── CSVエクスポート ── */
 function openModal(){ document.getElementById('csv-modal').classList.add('open'); }
 function closeModal(){ document.getElementById('csv-modal').classList.remove('open'); }
-
 function exportCSV(type){
-  // エクスポート対象を決定
   const target = type === 'month' ? getMonthItems() : items;
-  const filename = type === 'month'
-    ? `家計簿_${currentYear}年${currentMonth}月.csv`
-    : `家計簿_全データ.csv`;
-
-  if(target.length === 0){
-    alert('エクスポートするデータがありません。');
-    closeModal();
-    return;
-  }
-
-  // CSVのヘッダー行
+  const filename = type === 'month' ? `家計簿_${currentYear}年${currentMonth}月.csv` : `家計簿_全データ.csv`;
+  if(target.length === 0){ alert('エクスポートするデータがありません。'); closeModal(); return; }
   const headers = ['日付', 'メモ', 'カテゴリ', '種別', '金額', '固定費'];
-
-  // データ行を作成
-  const rows = target.map(i => [
-    i.date,
-    i.memo,
-    i.cat,
-    i.type === 'income' ? '収入' : '支出',
-    i.amount,
-    i.isFixed ? '〇' : ''
-  ]);
-
-  // ヘッダー＋データを結合してCSV文字列を生成
-  const csv = [headers, ...rows]
-    .map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(','))
-    .join('\n');
-
-  // BOM付きUTF-8でダウンロード（Excelで文字化けしないように）
-  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8' });
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  a.href     = url;
-  a.download = filename;
-  a.click();
+  const rows = target.map(i => [i.date, i.memo, i.cat, i.type==='income'?'収入':'支出', i.amount, i.isFixed?'〇':'']);
+  const csv = [headers, ...rows].map(row => row.map(cell => `"${String(cell).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob = new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename; a.click();
   URL.revokeObjectURL(url);
-
   closeModal();
 }
 
 /* ── 固定費の自動追加 ── */
 function applyFixedCosts(){
-  if(fixedCosts.length === 0) return;
-  const now = new Date();
-  const year  = now.getFullYear();
-  const month = now.getMonth() + 1;
-  const todayDay = now.getDate();
-  const added = [];
-  fixedCosts.forEach(f => {
-    if(todayDay < f.day) return;
-    const dateStr = `${year}-${String(month).padStart(2,'0')}-${String(f.day).padStart(2,'0')}`;
-    const alreadyAdded = items.some(i =>
-      i.date === dateStr && i.memo === f.name && i.cat === f.cat &&
-      i.amount === f.amount && i.type === f.type && i.isFixed === true
-    );
-    if(!alreadyAdded){
-      items.unshift({ id:Date.now()+Math.random(), date:dateStr, memo:f.name, cat:f.cat, amount:f.amount, type:f.type, isFixed:true });
-      added.push(f.name);
-    }
+  if(fixedCosts.length===0) return;
+  const now=new Date();
+  const year=now.getFullYear(), month=now.getMonth()+1, todayDay=now.getDate();
+  const added=[];
+  fixedCosts.forEach(f=>{
+    if(todayDay<f.day) return;
+    const dateStr=`${year}-${String(month).padStart(2,'0')}-${String(f.day).padStart(2,'0')}`;
+    const alreadyAdded=items.some(i=>i.date===dateStr&&i.memo===f.name&&i.cat===f.cat&&i.amount===f.amount&&i.type===f.type&&i.isFixed===true);
+    if(!alreadyAdded){ items.unshift({id:Date.now()+Math.random(),date:dateStr,memo:f.name,cat:f.cat,amount:f.amount,type:f.type,isFixed:true}); added.push(f.name); }
   });
-  if(added.length > 0){
+  if(added.length>0){
     save();
-    const notice = document.getElementById('fixed-notice');
-    notice.textContent = `✅ 固定費を自動追加しました：${added.join('・')}`;
-    notice.style.display = 'block';
-    setTimeout(()=>{ notice.style.display='none'; }, 4000);
+    const notice=document.getElementById('fixed-notice');
+    notice.textContent=`✅ 固定費を自動追加しました：${added.join('・')}`;
+    notice.style.display='block';
+    setTimeout(()=>{ notice.style.display='none'; },4000);
   }
 }
 
 /* ── 月ナビ ── */
-function updateMonthLabel(){ document.getElementById('month-label').textContent = `${currentYear}年${currentMonth}月`; }
+function updateMonthLabel(){ document.getElementById('month-label').textContent=`${currentYear}年${currentMonth}月`; }
 function changeMonth(diff){
-  currentMonth += diff;
+  currentMonth+=diff;
   if(currentMonth>12){currentMonth=1;currentYear++;}
   if(currentMonth<1){currentMonth=12;currentYear--;}
   updateMonthLabel(); render();
@@ -390,10 +358,7 @@ function goToToday(){
   updateMonthLabel(); render();
 }
 function getMonthItems(){
-  return items.filter(i=>{
-    const d=new Date(i.date);
-    return d.getFullYear()===currentYear && d.getMonth()+1===currentMonth;
-  });
+  return items.filter(i=>{ const d=new Date(i.date); return d.getFullYear()===currentYear&&d.getMonth()+1===currentMonth; });
 }
 
 /* ── 予算パネル ── */
@@ -401,27 +366,25 @@ function toggleBudgetPanel(){
   const body=document.getElementById('budget-panel-body');
   const label=document.getElementById('budget-toggle-label');
   const isOpen=body.classList.toggle('open');
-  label.textContent = isOpen ? '閉じる ▲' : '開く ▼';
+  label.textContent=isOpen?'閉じる ▲':'開く ▼';
   if(isOpen) renderBudgetInputs();
 }
 function renderBudgetInputs(){
-  document.getElementById('budget-total-input').value = budgets.total || '';
-  const catRows = document.getElementById('budget-cat-rows');
-  catRows.innerHTML = CATS.map(cat=>`
+  document.getElementById('budget-total-input').value=budgets.total||'';
+  const catRows=document.getElementById('budget-cat-rows');
+  catRows.innerHTML=getCatNames().map(cat=>`
     <div class="budget-row">
       <label>${cat}</label>
-      <input type="number" id="bcat-${cat}" placeholder="未設定" min="0"
-        value="${(budgets.cats&&budgets.cats[cat])||''}">
+      <input type="number" id="bcat-${cat}" placeholder="未設定" min="0" value="${(budgets.cats&&budgets.cats[cat])||''}">
       <span style="font-size:13px;color:var(--color-text-secondary);">円</span>
     </div>
   `).join('');
 }
 function saveBudget(){
-  const total = parseInt(document.getElementById('budget-total-input').value)||null;
-  const cats = {};
-  CATS.forEach(cat=>{ const v=parseInt(document.getElementById('bcat-'+cat).value)||null; if(v) cats[cat]=v; });
-  budgets = { total, cats };
-  saveBudgetData(); toggleBudgetPanel(); render();
+  const total=parseInt(document.getElementById('budget-total-input').value)||null;
+  const cats={};
+  getCatNames().forEach(cat=>{ const v=parseInt(document.getElementById('bcat-'+cat).value)||null; if(v) cats[cat]=v; });
+  budgets={total,cats}; saveBudgetData(); toggleBudgetPanel(); render();
 }
 function clearBudget(){ budgets={}; saveBudgetData(); renderBudgetInputs(); render(); }
 
@@ -436,9 +399,7 @@ function renderBudgetUI(monthItems){
     const pct=Math.min(expense/totalBudget*100,100);
     const remaining=totalBudget-expense;
     const status=pct>=100?'over':pct>=80?'warn':'ok';
-    barWrap.style.display='block';
-    barEl.style.width=pct+'%';
-    barEl.className='budget-bar '+status;
+    barWrap.style.display='block'; barEl.style.width=pct+'%'; barEl.className='budget-bar '+status;
     labelEl.className='card-budget '+status;
     labelEl.textContent=remaining>=0?`残り ${fmt(remaining)} / ${fmt(totalBudget)}`:`超過 ${fmt(-remaining)} ⚠️`;
   } else { barWrap.style.display='none'; labelEl.textContent=''; }
@@ -480,9 +441,9 @@ function renderChart(monthItems){
       <div class="chart-legend" id="chart-legend"></div>
     </div>
   `;
-  document.getElementById('chart-legend').innerHTML=cats.map(([cat,amt])=>`
+  document.getElementById('chart-legend').innerHTML=cats.map(([cat,amt],i)=>`
     <div class="legend-item">
-      <div class="legend-dot" style="background:${getCatColor(cat)}"></div>
+      <div class="legend-dot" style="background:${getCatColor(cat,i)}"></div>
       <span class="legend-name">${cat}</span>
       <span class="legend-amount">${fmt(amt)}</span>
       <span class="legend-pct">${Math.round(amt/total*100)}%</span>
@@ -492,11 +453,11 @@ function renderChart(monthItems){
   const ctx=canvas.getContext('2d');
   const cx=70,cy=70,r=60,innerR=36;
   let startAngle=-Math.PI/2;
-  cats.forEach(([cat,amt])=>{
+  cats.forEach(([cat,amt],i)=>{
     const slice=(amt/total)*2*Math.PI;
     ctx.beginPath();ctx.moveTo(cx,cy);
     ctx.arc(cx,cy,r,startAngle,startAngle+slice);
-    ctx.closePath();ctx.fillStyle=getCatColor(cat);ctx.fill();
+    ctx.closePath();ctx.fillStyle=getCatColor(cat,i);ctx.fill();
     startAngle+=slice;
   });
   ctx.beginPath();ctx.arc(cx,cy,innerR,0,2*Math.PI);
@@ -563,6 +524,7 @@ function render(){
   `).join('');
 }
 
+renderCatSelect();
 applyFixedCosts();
 updateMonthLabel();
 render();
