@@ -2,69 +2,13 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>このアプリについて｜シンプル家計簿アプリ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>このアプリについて｜シンプル家計簿アプリ</title>
   <meta name="description" content="シンプル家計簿アプリの開発背景・特徴・開発者についてのご紹介です。">
-  <style>
-    :root{
-      --color-text-primary:#222;
-      --color-text-secondary:#666;
-      --color-background-primary:#fff;
-      --color-background-secondary:#f5f5f5;
-      --color-border-secondary:#ddd;
-      --color-border-tertiary:#eee;
-      --color-green:#1D9E75;
-      --border-radius-md:8px;
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans JP",sans-serif;
-      color:var(--color-text-primary);
-      background:var(--color-background-primary);
-      font-size:15px;
-      line-height:1.7;
-    }
-    header{
-      border-bottom:0.5px solid var(--color-border-tertiary);
-      padding:0 20px;
-    }
-    .header-inner{
-      max-width:680px;
-      margin:0 auto;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      height:52px;
-    }
-    .logo{font-size:15px;font-weight:600;text-decoration:none;color:var(--color-text-primary);}
-    nav{display:flex;gap:20px;}
-    nav a{font-size:13px;color:var(--color-text-secondary);text-decoration:none;}
-    nav a:hover{color:var(--color-text-primary);}
-    .wrap{max-width:680px;margin:0 auto;padding:40px 20px 80px;}
-    .page-title{font-size:22px;font-weight:600;margin-bottom:6px;}
-    .page-desc{font-size:13px;color:var(--color-text-secondary);margin-bottom:32px;}
-    .section{margin-bottom:32px;}
-    h2{font-size:15px;font-weight:600;margin-bottom:10px;padding-bottom:6px;border-bottom:0.5px solid var(--color-border-tertiary);}
-    p{font-size:14px;color:#444;margin-bottom:8px;}
-    .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:4px;}
-    .feature-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:14px 16px;}
-    .feature-icon{font-size:20px;margin-bottom:6px;}
-    .feature-title{font-size:13px;font-weight:600;margin-bottom:4px;}
-    .feature-desc{font-size:12px;color:var(--color-text-secondary);}
-    .profile-box{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:16px 20px;display:flex;gap:16px;align-items:flex-start;}
-    .profile-icon{width:44px;height:44px;background:var(--color-green);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
-    .profile-text{}
-    .profile-name{font-size:14px;font-weight:600;margin-bottom:4px;}
-    .profile-bio{font-size:13px;color:var(--color-text-secondary);}
-    .back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--color-green);text-decoration:none;margin-top:8px;}
-    .back-btn:hover{opacity:0.8;}
-    footer{border-top:0.5px solid var(--color-border-tertiary);padding:20px;text-align:center;}
-    .footer-inner{max-width:680px;margin:0 auto;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
-    footer a{font-size:12px;color:var(--color-text-secondary);text-decoration:none;}
-    footer a:hover{color:var(--color-text-primary);}
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<button class="theme-btn" id="theme-btn" onclick="toggleTheme()">🌙</button>
 <header>
   <div class="header-inner">
     <a class="logo" href="index.html">📒 シンプル家計簿</a>
@@ -86,17 +30,17 @@
       <div class="feature-card">
         <div class="feature-icon">⚡</div>
         <div class="feature-title">インストール不要</div>
-        <div class="feature-desc">ブラウザを開くだけですぐ使えます。アプリのダウンロードは不要です。</div>
+        <div class="feature-desc">ブラウザを開くだけですぐ使えます。</div>
       </div>
       <div class="feature-card">
         <div class="feature-icon">📱</div>
         <div class="feature-title">スマホ・PC対応</div>
-        <div class="feature-desc">iPhoneやAndroid、パソコンどこからでも快適に使えます。</div>
+        <div class="feature-desc">どこからでも快適に使えます。</div>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🔒</div>
         <div class="feature-title">データは端末内に保存</div>
-        <div class="feature-desc">入力したデータは外部に送信されません。安心してご利用ください。</div>
+        <div class="feature-desc">入力したデータは外部に送信されません。</div>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🆓</div>
@@ -110,16 +54,13 @@
     <h2>開発者について</h2>
     <div class="profile-box">
       <img src="inu.png" alt="プロフィール画像" style="width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;">
-      <div class="profile-text">
-<div class="profile-name">Tueno-96</div>
-<div class="profile-bio">
-  元学習塾教材開発→新人プログラマー。「わからない人の気持ち」がわかるつもりで、初心者目線のアプリ作りを目指しています。AIを活用しながら0円でWebアプリを公開するのが最近のテーマ。
-</div>
-<a href="https://qiita.com/Tueno-96" target="_blank" rel="noopener"
-  style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:13px;color:#55C500;text-decoration:none;font-weight:600;">
-  📗 Qiitaプロフィールを見る →
-</a>
-        </div>
+      <div>
+        <div class="profile-name">元学習塾教材開発→新人プログラマー</div>
+        <div class="profile-bio">「わからない人の気持ち」がわかるつもりで、初心者目線のアプリ作りを目指しています。AIを活用しながら0円でWebアプリを公開するのが最近のテーマ。</div>
+        <a href="https://qiita.com/Tueno-96" target="_blank" rel="noopener"
+          style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:13px;color:#55C500;text-decoration:none;font-weight:600;">
+          📗 Qiitaプロフィールを見る →
+        </a>
       </div>
     </div>
   </div>
@@ -130,10 +71,30 @@
 <footer>
   <div class="footer-inner">
     <a href="index.html">ホーム</a>
+    <a href="fixedcost.html">固定費設定</a>
+    <a href="category.html">カテゴリ設定</a>
     <a href="howto.html">使い方</a>
     <a href="about.html">このアプリについて</a>
     <a href="privacy.html">プライバシーポリシー</a>
   </div>
 </footer>
+
+<script>
+function applyTheme(theme){
+  const html=document.documentElement,btn=document.getElementById('theme-btn');
+  html.classList.remove('dark','light');
+  if(theme==='dark'){html.classList.add('dark');btn.textContent='☀️';}
+  else if(theme==='light'){html.classList.add('light');btn.textContent='🌙';}
+  else{btn.textContent=window.matchMedia('(prefers-color-scheme:dark)').matches?'☀️':'🌙';}
+}
+function toggleTheme(){
+  const isDark=document.documentElement.classList.contains('dark')||
+    (!document.documentElement.classList.contains('light')&&window.matchMedia('(prefers-color-scheme:dark)').matches);
+  const next=isDark?'light':'dark';
+  localStorage.setItem('theme',next);
+  applyTheme(next);
+}
+applyTheme(localStorage.getItem('theme')||'auto');
+</script>
 </body>
 </html>

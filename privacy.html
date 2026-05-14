@@ -2,50 +2,13 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>プライバシーポリシー｜シンプル家計簿アプリ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="シンプル家計簿アプリのプライバシーポリシーです。データの取り扱いや広告についてご確認ください。">
-  <style>
-    :root{
-      --color-text-primary:#222;
-      --color-text-secondary:#666;
-      --color-background-primary:#fff;
-      --color-background-secondary:#f5f5f5;
-      --color-border-secondary:#ddd;
-      --color-border-tertiary:#eee;
-      --color-green:#1D9E75;
-      --border-radius-md:8px;
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans JP",sans-serif;
-      color:var(--color-text-primary);
-      background:var(--color-background-primary);
-      font-size:15px;
-      line-height:1.7;
-    }
-    header{border-bottom:0.5px solid var(--color-border-tertiary);padding:0 20px;}
-    .header-inner{max-width:680px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:52px;}
-    .logo{font-size:15px;font-weight:600;text-decoration:none;color:var(--color-text-primary);}
-    nav{display:flex;gap:20px;}
-    nav a{font-size:13px;color:var(--color-text-secondary);text-decoration:none;}
-    nav a:hover{color:var(--color-text-primary);}
-    .wrap{max-width:680px;margin:0 auto;padding:40px 20px 80px;}
-    .page-title{font-size:22px;font-weight:600;margin-bottom:6px;}
-    .page-desc{font-size:13px;color:var(--color-text-secondary);margin-bottom:8px;}
-    .update-date{font-size:12px;color:var(--color-text-secondary);margin-bottom:32px;}
-    .section{margin-bottom:28px;}
-    h2{font-size:15px;font-weight:600;margin-bottom:10px;padding-bottom:6px;border-bottom:0.5px solid var(--color-border-tertiary);}
-    p{font-size:14px;color:#444;margin-bottom:8px;}
-    .back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--color-green);text-decoration:none;margin-top:8px;}
-    .back-btn:hover{opacity:0.8;}
-    footer{border-top:0.5px solid var(--color-border-tertiary);padding:20px;text-align:center;}
-    .footer-inner{max-width:680px;margin:0 auto;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
-    footer a{font-size:12px;color:var(--color-text-secondary);text-decoration:none;}
-    footer a:hover{color:var(--color-text-primary);}
-  </style>
+  <title>プライバシーポリシー｜シンプル家計簿アプリ</title>
+  <meta name="description" content="シンプル家計簿アプリのプライバシーポリシーです。">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<button class="theme-btn" id="theme-btn" onclick="toggleTheme()">🌙</button>
 <header>
   <div class="header-inner">
     <a class="logo" href="index.html">📒 シンプル家計簿</a>
@@ -60,7 +23,7 @@
 <div class="wrap">
   <div class="page-title">プライバシーポリシー</div>
   <div class="page-desc">本アプリにおける個人情報・データの取り扱いについて説明します。</div>
-  <div class="update-date">最終更新日：2025年4月</div>
+  <div class="update-date" style="font-size:12px;color:var(--color-text-secondary);margin-bottom:32px;">最終更新日：2025年4月</div>
 
   <div class="section">
     <h2>個人情報の収集について</h2>
@@ -99,10 +62,30 @@
 <footer>
   <div class="footer-inner">
     <a href="index.html">ホーム</a>
+    <a href="fixedcost.html">固定費設定</a>
+    <a href="category.html">カテゴリ設定</a>
     <a href="howto.html">使い方</a>
     <a href="about.html">このアプリについて</a>
     <a href="privacy.html">プライバシーポリシー</a>
   </div>
 </footer>
+
+<script>
+function applyTheme(theme){
+  const html=document.documentElement,btn=document.getElementById('theme-btn');
+  html.classList.remove('dark','light');
+  if(theme==='dark'){html.classList.add('dark');btn.textContent='☀️';}
+  else if(theme==='light'){html.classList.add('light');btn.textContent='🌙';}
+  else{btn.textContent=window.matchMedia('(prefers-color-scheme:dark)').matches?'☀️':'🌙';}
+}
+function toggleTheme(){
+  const isDark=document.documentElement.classList.contains('dark')||
+    (!document.documentElement.classList.contains('light')&&window.matchMedia('(prefers-color-scheme:dark)').matches);
+  const next=isDark?'light':'dark';
+  localStorage.setItem('theme',next);
+  applyTheme(next);
+}
+applyTheme(localStorage.getItem('theme')||'auto');
+</script>
 </body>
 </html>

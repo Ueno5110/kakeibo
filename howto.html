@@ -2,56 +2,13 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>使い方｜シンプル家計簿アプリ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="シンプル家計簿アプリの使い方を詳しく解説します。収入・支出の入力方法からフィルター機能まで。">
-  <style>
-    :root{
-      --color-text-primary:#222;
-      --color-text-secondary:#666;
-      --color-background-primary:#fff;
-      --color-background-secondary:#f5f5f5;
-      --color-border-secondary:#ddd;
-      --color-border-tertiary:#eee;
-      --color-green:#1D9E75;
-      --border-radius-md:8px;
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans JP",sans-serif;
-      color:var(--color-text-primary);
-      background:var(--color-background-primary);
-      font-size:15px;
-      line-height:1.7;
-    }
-    header{border-bottom:0.5px solid var(--color-border-tertiary);padding:0 20px;}
-    .header-inner{max-width:680px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:52px;}
-    .logo{font-size:15px;font-weight:600;text-decoration:none;color:var(--color-text-primary);}
-    nav{display:flex;gap:20px;}
-    nav a{font-size:13px;color:var(--color-text-secondary);text-decoration:none;}
-    nav a:hover{color:var(--color-text-primary);}
-    .wrap{max-width:680px;margin:0 auto;padding:40px 20px 80px;}
-    .page-title{font-size:22px;font-weight:600;margin-bottom:6px;}
-    .page-desc{font-size:13px;color:var(--color-text-secondary);margin-bottom:32px;}
-    .step{display:flex;gap:16px;margin-bottom:24px;}
-    .step-num{width:32px;height:32px;background:var(--color-green);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;flex-shrink:0;margin-top:2px;}
-    .step-body{}
-    .step-title{font-size:15px;font-weight:600;margin-bottom:6px;}
-    .step-desc{font-size:14px;color:#444;}
-    .step-list{margin:8px 0 0 0;padding-left:0;list-style:none;}
-    .step-list li{font-size:13px;color:var(--color-text-secondary);padding:4px 0;padding-left:14px;position:relative;}
-    .step-list li::before{content:"・";position:absolute;left:0;}
-    .divider{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:8px 0 24px;}
-    .note-box{background:#FFF8E1;border-left:3px solid #F9A825;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;padding:12px 16px;font-size:13px;color:#555;margin-top:8px;}
-    .back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--color-green);text-decoration:none;margin-top:8px;}
-    .back-btn:hover{opacity:0.8;}
-    footer{border-top:0.5px solid var(--color-border-tertiary);padding:20px;text-align:center;}
-    .footer-inner{max-width:680px;margin:0 auto;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
-    footer a{font-size:12px;color:var(--color-text-secondary);text-decoration:none;}
-    footer a:hover{color:var(--color-text-primary);}
-  </style>
+  <title>使い方｜シンプル家計簿アプリ</title>
+  <meta name="description" content="シンプル家計簿アプリの使い方を詳しく解説します。">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<button class="theme-btn" id="theme-btn" onclick="toggleTheme()">🌙</button>
 <header>
   <div class="header-inner">
     <a class="logo" href="index.html">📒 シンプル家計簿</a>
@@ -69,7 +26,7 @@
 
   <div class="step">
     <div class="step-num">1</div>
-    <div class="step-body">
+    <div>
       <div class="step-title">収支を入力する</div>
       <div class="step-desc">画面上部のフォームに以下を入力して「追加」を押します。</div>
       <ul class="step-list">
@@ -85,34 +42,61 @@
 
   <div class="step">
     <div class="step-num">2</div>
-    <div class="step-body">
-      <div class="step-title">残高を確認する</div>
-      <div class="step-desc">収入合計・支出合計・残高が自動で計算され、上部のカードに表示されます。入力するたびにリアルタイムで更新されます。</div>
+    <div>
+      <div class="step-title">月別に収支を確認する</div>
+      <div class="step-desc">‹ › ボタンで月を切り替えられます。収入合計・支出合計・残高がその月だけで自動計算されます。</div>
     </div>
   </div>
   <hr class="divider">
 
   <div class="step">
     <div class="step-num">3</div>
-    <div class="step-body">
-      <div class="step-title">フィルターで絞り込む</div>
-      <div class="step-desc">一覧を「すべて」「収入のみ」「支出のみ」で切り替えて確認できます。</div>
+    <div>
+      <div class="step-title">円グラフで支出の内訳を確認する</div>
+      <div class="step-desc">カテゴリ別の支出割合が円グラフで表示されます。何にお金を使っているか一目でわかります。</div>
     </div>
   </div>
   <hr class="divider">
 
   <div class="step">
     <div class="step-num">4</div>
-    <div class="step-body">
-      <div class="step-title">不要なデータを削除する</div>
-      <div class="step-desc">一覧の右端にある「✕」ボタンを押すと、その項目を削除できます。</div>
+    <div>
+      <div class="step-title">予算を設定する（任意）</div>
+      <div class="step-desc">「⚙️ 予算設定」から月全体・カテゴリ別の予算を設定できます。80%超過で警告、100%超過でアラートが表示されます。</div>
     </div>
   </div>
   <hr class="divider">
 
   <div class="step">
     <div class="step-num">5</div>
-    <div class="step-body">
+    <div>
+      <div class="step-title">固定費を自動追加する</div>
+      <div class="step-desc">「🔁 固定費設定」から毎月自動で追加される固定費を登録できます。家賃・光熱費・サブスクなどを登録しておくと便利です。</div>
+    </div>
+  </div>
+  <hr class="divider">
+
+  <div class="step">
+    <div class="step-num">6</div>
+    <div>
+      <div class="step-title">カテゴリをカスタマイズする</div>
+      <div class="step-desc">「🏷️ カテゴリ設定」からカテゴリの追加・編集・削除ができます。自分の生活に合ったカテゴリで管理できます。</div>
+    </div>
+  </div>
+  <hr class="divider">
+
+  <div class="step">
+    <div class="step-num">7</div>
+    <div>
+      <div class="step-title">CSVでエクスポートする</div>
+      <div class="step-desc">「📥 CSV」ボタンから今月または全データをCSVファイルでダウンロードできます。ExcelやGoogleスプレッドシートで開けます。</div>
+    </div>
+  </div>
+  <hr class="divider">
+
+  <div class="step">
+    <div class="step-num">8</div>
+    <div>
       <div class="step-title">データの保存について</div>
       <div class="step-desc">入力したデータはブラウザに自動保存されます。ページを閉じても次回開いたときに残っています。</div>
       <div class="note-box">⚠️ ブラウザのキャッシュ・履歴を削除するとデータも消えます。また、別の端末とは共有されません。</div>
@@ -125,10 +109,30 @@
 <footer>
   <div class="footer-inner">
     <a href="index.html">ホーム</a>
+    <a href="fixedcost.html">固定費設定</a>
+    <a href="category.html">カテゴリ設定</a>
     <a href="howto.html">使い方</a>
     <a href="about.html">このアプリについて</a>
     <a href="privacy.html">プライバシーポリシー</a>
   </div>
 </footer>
+
+<script>
+function applyTheme(theme){
+  const html=document.documentElement,btn=document.getElementById('theme-btn');
+  html.classList.remove('dark','light');
+  if(theme==='dark'){html.classList.add('dark');btn.textContent='☀️';}
+  else if(theme==='light'){html.classList.add('light');btn.textContent='🌙';}
+  else{btn.textContent=window.matchMedia('(prefers-color-scheme:dark)').matches?'☀️':'🌙';}
+}
+function toggleTheme(){
+  const isDark=document.documentElement.classList.contains('dark')||
+    (!document.documentElement.classList.contains('light')&&window.matchMedia('(prefers-color-scheme:dark)').matches);
+  const next=isDark?'light':'dark';
+  localStorage.setItem('theme',next);
+  applyTheme(next);
+}
+applyTheme(localStorage.getItem('theme')||'auto');
+</script>
 </body>
 </html>

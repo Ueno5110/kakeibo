@@ -1,0 +1,277 @@
+/* ========================================
+   シンプル家計簿アプリ 共通スタイル
+   style.css
+======================================== */
+
+/* ── カラー変数（ライトモード） ── */
+:root{
+  --color-text-primary:#222;
+  --color-text-secondary:#666;
+  --color-background-primary:#fff;
+  --color-background-secondary:#f5f5f5;
+  --color-border-secondary:#ddd;
+  --color-border-tertiary:#eee;
+  --color-green:#1D9E75;
+  --border-radius-md:8px;
+}
+
+/* ── ダークモード（ブラウザ設定に連動） ── */
+@media(prefers-color-scheme:dark){
+  :root{
+    --color-text-primary:#e8eaf6;
+    --color-text-secondary:#9196b5;
+    --color-background-primary:#1a1d27;
+    --color-background-secondary:#22263a;
+    --color-border-secondary:#2e3248;
+    --color-border-tertiary:#2e3248;
+  }
+}
+
+/* ── 手動ダークモード ── */
+html.dark{
+  --color-text-primary:#e8eaf6;
+  --color-text-secondary:#9196b5;
+  --color-background-primary:#1a1d27;
+  --color-background-secondary:#22263a;
+  --color-border-secondary:#2e3248;
+  --color-border-tertiary:#2e3248;
+}
+
+/* ── 手動ライトモード ── */
+html.light{
+  --color-text-primary:#222;
+  --color-text-secondary:#666;
+  --color-background-primary:#fff;
+  --color-background-secondary:#f5f5f5;
+  --color-border-secondary:#ddd;
+  --color-border-tertiary:#eee;
+}
+
+/* ── リセット・ベース ── */
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans JP",sans-serif;
+  color:var(--color-text-primary);
+  background:var(--color-background-primary);
+  transition:background .2s,color .2s;
+}
+
+/* ── レイアウト ── */
+.wrap{padding:1rem 16px;max-width:680px;margin:0 auto;}
+h2{font-size:18px;font-weight:500;color:var(--color-text-primary);margin-bottom:1rem}
+
+/* ── ヘッダー ── */
+header{border-bottom:0.5px solid var(--color-border-tertiary);padding:0 20px;}
+.header-inner{max-width:680px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:52px;}
+.logo{font-size:15px;font-weight:600;text-decoration:none;color:var(--color-text-primary);}
+nav{display:flex;gap:20px;}
+nav a{font-size:13px;color:var(--color-text-secondary);text-decoration:none;}
+nav a:hover{color:var(--color-text-primary);}
+
+/* ── フッター ── */
+footer{border-top:0.5px solid var(--color-border-tertiary);padding:20px;text-align:center;}
+.footer-inner{max-width:680px;margin:0 auto;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+footer a{font-size:12px;color:var(--color-text-secondary);text-decoration:none;}
+footer a:hover{color:var(--color-text-primary);}
+
+/* ── ダークモードトグルボタン ── */
+.theme-btn{
+  width:32px;height:32px;
+  border:0.5px solid var(--color-border-secondary);
+  border-radius:var(--border-radius-md);
+  background:var(--color-background-secondary);
+  color:var(--color-text-primary);
+  font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  position:fixed;top:12px;right:16px;z-index:50;
+}
+.theme-btn:hover{background:var(--color-border-secondary);}
+
+/* ── カード ── */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1rem}
+.card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px 14px}
+.card-label{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px}
+.card-value{font-size:20px;font-weight:500;color:var(--color-text-primary)}
+.card-value.income{color:#1D9E75}
+.card-value.expense{color:#E24B4A}
+
+/* ── フォーム ── */
+.form-row{display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap}
+.form-row input,.form-row select{
+  flex:1;min-width:100px;height:36px;padding:0 10px;
+  border:0.5px solid var(--color-border-secondary);
+  border-radius:var(--border-radius-md);
+  background:var(--color-background-primary);
+  color:var(--color-text-primary);font-size:14px
+}
+.form-row input:focus,.form-row select:focus{outline:none;box-shadow:0 0 0 2px var(--color-border-secondary)}
+#inp-date{min-width:120px;max-width:120px;}
+#inp-memo{min-width:160px;}
+
+/* ── ボタン ── */
+.btn{height:36px;padding:0 16px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);font-size:14px;cursor:pointer;white-space:nowrap}
+.btn:hover{background:var(--color-background-secondary)}
+.btn-add{background:#1D9E75;color:#fff;border-color:#1D9E75}
+.btn-add:hover{background:#0F6E56;border-color:#0F6E56}
+.btn-sm{height:30px;padding:0 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-secondary);font-size:12px;cursor:pointer;}
+.btn-sm:hover{background:var(--color-background-secondary);}
+.btn-edit{color:#3B82F6;border-color:#3B82F6;}
+.btn-edit:hover{background:#EFF6FF;}
+.btn-save{color:var(--color-green);border-color:var(--color-green);display:none;}
+.btn-save:hover{background:#E1F5EE;}
+.btn-cancel{color:var(--color-text-secondary);display:none;}
+.btn-del{color:#E24B4A;border-color:#E24B4A;}
+.btn-del:hover{background:#FEECEC;}
+.csv-btn{height:28px;padding:0 10px;border:0.5px solid #1D9E75;border-radius:var(--border-radius-md);background:#1D9E75;color:#fff;font-size:12px;cursor:pointer;white-space:nowrap;font-weight:600;}
+.csv-btn:hover{background:#0F6E56;}
+
+/* ── 一覧 ── */
+.list-header{display:grid;grid-template-columns:90px 1fr 80px 90px 36px;gap:8px;padding:6px 8px;font-size:12px;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:4px}
+.list-item{display:grid;grid-template-columns:90px 1fr 80px 90px 36px;gap:8px;align-items:center;padding:8px;border-radius:var(--border-radius-md);font-size:14px;margin-bottom:4px;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary)}
+.list-item:hover{background:var(--color-background-secondary)}
+.badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:500}
+.badge.income{background:#E1F5EE;color:#0F6E56}
+.badge.expense{background:#FCEBEB;color:#A32D2D}
+.amount.income{color:#1D9E75;font-weight:500}
+.amount.expense{color:#E24B4A;font-weight:500}
+.del-btn{width:28px;height:28px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);background:transparent;color:var(--color-text-secondary);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px}
+.del-btn:hover{background:#FCEBEB;color:#E24B4A;border-color:#F09595}
+.empty{text-align:center;padding:2rem;color:var(--color-text-secondary);font-size:14px}
+
+/* ── フィルター ── */
+.filter-row{display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap}
+.filter-btn{height:30px;padding:0 12px;border:0.5px solid var(--color-border-secondary);border-radius:999px;background:var(--color-background-primary);color:var(--color-text-secondary);font-size:13px;cursor:pointer}
+.filter-btn.active{background:var(--color-text-primary);color:var(--color-background-primary);border-color:var(--color-text-primary)}
+
+/* ── 月ナビ ── */
+.month-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:8px 12px;}
+.month-nav-btn{width:32px;height:32px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.month-nav-btn:hover{background:var(--color-background-secondary);}
+.month-label{font-size:15px;font-weight:600;color:var(--color-text-primary);}
+.month-today-btn{font-size:12px;color:#1D9E75;border:0.5px solid #1D9E75;border-radius:999px;padding:3px 10px;background:transparent;cursor:pointer;}
+.month-today-btn:hover{background:#E1F5EE;}
+
+/* ── 円グラフ ── */
+.chart-section{margin-bottom:1.5rem;display:flex;flex-direction:column;align-items:center;}
+.chart-inner{display:flex;flex-direction:column;align-items:center;gap:16px;}
+.chart-wrap{position:relative;width:140px;height:140px;flex-shrink:0;}
+.chart-wrap canvas{width:140px !important;height:140px !important;}
+.chart-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;}
+.chart-center-label{font-size:11px;color:var(--color-text-secondary);}
+.chart-center-value{font-size:14px;font-weight:600;color:#E24B4A;}
+.chart-legend{display:flex;flex-direction:column;gap:6px;min-width:200px;}
+.legend-item{display:flex;align-items:center;gap:8px;font-size:13px;}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.legend-name{flex:1;color:var(--color-text-primary);}
+.legend-amount{font-weight:500;color:var(--color-text-primary);}
+.legend-pct{font-size:11px;color:var(--color-text-secondary);margin-left:4px;}
+.chart-empty{text-align:center;padding:1.5rem;color:var(--color-text-secondary);font-size:13px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);width:100%;}
+
+/* ── 予算バー ── */
+.budget-bar-wrap{height:6px;background:var(--color-border-secondary);border-radius:999px;margin-top:6px;overflow:hidden;}
+.budget-bar{height:6px;border-radius:999px;transition:width .3s;}
+.budget-bar.ok{background:#1D9E75;}
+.budget-bar.warn{background:#F0A04B;}
+.budget-bar.over{background:#E24B4A;}
+.card-budget{font-size:11px;margin-top:4px;}
+.card-budget.ok{color:#1D9E75;}
+.card-budget.warn{color:#F0A04B;}
+.card-budget.over{color:#E24B4A;font-weight:600;}
+
+/* ── アラートボックス ── */
+.alert-box{border-radius:var(--border-radius-md);padding:10px 14px;font-size:13px;margin-bottom:12px;display:flex;align-items:flex-start;gap:8px;}
+.alert-box.warn{background:#FFF8E1;border:0.5px solid #F0A04B;color:#7a5000;}
+.alert-box.over{background:#FEECEC;border:0.5px solid #E24B4A;color:#7a1a1a;}
+.alert-icon{font-size:16px;flex-shrink:0;}
+
+/* ── 予算パネル ── */
+.budget-panel{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:14px 16px;margin-bottom:1.2rem;}
+.budget-panel-header{display:flex;align-items:center;justify-content:space-between;}
+.budget-panel-title{font-size:13px;font-weight:600;color:var(--color-text-secondary);cursor:pointer;}
+.budget-panel-toggle{font-size:12px;color:#1D9E75;cursor:pointer;}
+.budget-panel-body{margin-top:12px;display:none;}
+.budget-panel-body.open{display:block;}
+.budget-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
+.budget-row label{font-size:13px;color:var(--color-text-primary);min-width:80px;}
+.budget-row input{height:32px;padding:0 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);font-size:13px;width:130px;}
+.budget-save-btn{height:32px;padding:0 14px;border:none;border-radius:var(--border-radius-md);background:#1D9E75;color:#fff;font-size:13px;font-weight:600;cursor:pointer;margin-top:4px;}
+.budget-save-btn:hover{background:#0F6E56;}
+.budget-clear-btn{height:32px;padding:0 14px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-secondary);font-size:13px;cursor:pointer;margin-top:4px;}
+.budget-clear-btn:hover{background:var(--color-background-secondary);}
+
+/* ── 固定費通知 ── */
+.fixed-notice{background:#E1F5EE;border-radius:var(--border-radius-md);padding:10px 14px;font-size:13px;color:#0F6E56;margin-bottom:12px;display:none;}
+
+/* ── モーダル ── */
+.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);display:none;align-items:center;justify-content:center;z-index:100;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--color-background-primary);border-radius:var(--border-radius-md);padding:24px;width:90%;max-width:340px;}
+.modal-title{font-size:15px;font-weight:600;margin-bottom:16px;}
+.modal-btn{display:block;width:100%;height:44px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-secondary);color:var(--color-text-primary);font-size:14px;cursor:pointer;margin-bottom:10px;text-align:left;padding:0 16px;}
+.modal-btn:hover{background:var(--color-border-secondary);}
+.modal-cancel{display:block;width:100%;height:36px;border:none;background:transparent;color:var(--color-text-secondary);font-size:13px;cursor:pointer;margin-top:4px;}
+.modal-cancel:hover{color:var(--color-text-primary);}
+
+/* ── 情報セクション ── */
+.info-section{display:flex;gap:40px;flex-wrap:wrap;margin-top:30px;padding-top:24px;border-top:0.5px solid var(--color-border-tertiary);}
+.info-block{flex:1;min-width:200px;}
+.info-block h2{font-size:15px;margin-bottom:8px;}
+.info-block p,.info-block li{font-size:13px;color:var(--color-text-secondary);line-height:1.7;}
+.info-block ul{padding-left:16px;margin-bottom:12px;}
+.site-footer{margin-top:30px;padding:20px 0;text-align:center;border-top:0.5px solid var(--color-border-tertiary);}
+.site-footer a{font-size:12px;color:var(--color-text-secondary);text-decoration:none;margin:0 8px;}
+.site-footer a:hover{color:var(--color-text-primary);}
+
+/* ── サブページ共通 ── */
+.page-title{font-size:22px;font-weight:600;margin-bottom:6px;}
+.page-desc{font-size:13px;color:var(--color-text-secondary);margin-bottom:20px;}
+.info-box{background:#E1F5EE;border-left:3px solid var(--color-green);border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;padding:10px 14px;font-size:13px;color:#0F6E56;margin-bottom:20px;}
+.warn-box{background:#FFF8E1;border-left:3px solid #F0A04B;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;padding:10px 14px;font-size:13px;color:#7a5000;margin-bottom:20px;display:none;}
+.back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--color-green);text-decoration:none;margin-top:8px;}
+.section{margin-bottom:32px;}
+
+/* ── カード（サブページ用） ── */
+.sub-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:16px;margin-bottom:16px;}
+.card-title{font-size:13px;font-weight:600;color:var(--color-text-secondary);margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px;}
+
+/* ── ステップ（howto用） ── */
+.step{display:flex;gap:16px;margin-bottom:24px;}
+.step-num{width:32px;height:32px;background:var(--color-green);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;flex-shrink:0;margin-top:2px;}
+.step-title{font-size:15px;font-weight:600;margin-bottom:6px;}
+.step-desc{font-size:14px;color:var(--color-text-secondary);}
+.step-list{margin:8px 0 0 0;padding-left:0;list-style:none;}
+.step-list li{font-size:13px;color:var(--color-text-secondary);padding:4px 0;padding-left:14px;position:relative;}
+.step-list li::before{content:"・";position:absolute;left:0;}
+.divider{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:8px 0 24px;}
+.note-box{background:#FFF8E1;border-left:3px solid #F9A825;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;padding:12px 16px;font-size:13px;color:#555;margin-top:8px;}
+
+/* ── about用 ── */
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:4px;}
+.feature-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:14px 16px;}
+.feature-icon{font-size:20px;margin-bottom:6px;}
+.feature-title{font-size:13px;font-weight:600;margin-bottom:4px;}
+.feature-desc{font-size:12px;color:var(--color-text-secondary);}
+.profile-box{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:16px 20px;display:flex;gap:16px;align-items:flex-start;}
+.profile-name{font-size:14px;font-weight:600;margin-bottom:4px;}
+.profile-bio{font-size:13px;color:var(--color-text-secondary);}
+
+/* ── カテゴリ設定用 ── */
+.cat-item{display:flex;align-items:center;gap:8px;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px 12px;margin-bottom:8px;}
+.cat-name{flex:1;font-size:14px;font-weight:500;}
+.cat-default{font-size:11px;color:var(--color-text-secondary);margin-left:6px;}
+.edit-input{flex:1;height:32px;padding:0 10px;border:0.5px solid var(--color-green);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);font-size:14px;outline:none;display:none;}
+
+/* ── 固定費設定用 ── */
+.fixed-item{display:grid;grid-template-columns:1fr 80px 60px 80px 36px;gap:8px;align-items:center;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px 12px;font-size:14px;margin-bottom:8px;}
+.fixed-list-header{display:grid;grid-template-columns:1fr 80px 60px 80px 36px;gap:8px;padding:6px 12px;font-size:11px;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:4px;}
+
+/* ── レスポンシブ ── */
+@media(max-width:480px){
+  .list-header{grid-template-columns:72px 1fr 52px 72px 28px;font-size:11px;}
+  .list-item{grid-template-columns:72px 1fr 52px 72px 28px;font-size:12px;}
+  .fixed-item{grid-template-columns:1fr 60px 50px 70px 28px;font-size:13px;}
+  .fixed-list-header{grid-template-columns:1fr 60px 50px 70px 28px;}
+}
+
+/* ── ダークモード時のprivacyリンク色 ── */
+html.dark a[href*="policies.google.com"]{color:var(--color-green);}

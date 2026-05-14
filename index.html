@@ -6,122 +6,12 @@
   <title>無料のシンプル家計簿アプリ｜ブラウザで使える家計管理ツール</title>
   <meta name="description" content="ブラウザで簡単に使える無料の家計簿アプリ。収入・支出を記録して残高を自動計算。シンプルで使いやすい家計管理ツールです。">
   <meta name="google-site-verification" content="Vpejjgy2v8YnU3CpGv6LPKepcT5oreoE4VWVMny3xwI" />
-  <style>
-    :root{
-      --color-text-primary:#222;
-      --color-text-secondary:#666;
-      --color-background-primary:#fff;
-      --color-background-secondary:#f5f5f5;
-      --color-border-secondary:#ddd;
-      --color-border-tertiary:#eee;
-      --border-radius-md:8px;
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans JP",sans-serif;}
-    .wrap{padding:1rem 16px;max-width:680px;margin:0 auto;}
-    h2{font-size:18px;font-weight:500;color:var(--color-text-primary);margin-bottom:1rem}
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1rem}
-    .card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px 14px}
-    .card-label{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px}
-    .card-value{font-size:20px;font-weight:500;color:var(--color-text-primary)}
-    .card-value.income{color:#1D9E75}
-    .card-value.expense{color:#E24B4A}
-    .form-row{display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap}
-    .form-row input,.form-row select{flex:1;min-width:100px;height:36px;padding:0 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);font-size:14px}
-    .form-row input:focus,.form-row select:focus{outline:none;box-shadow:0 0 0 2px var(--color-border-secondary)}
-    .btn{height:36px;padding:0 16px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);font-size:14px;cursor:pointer;white-space:nowrap}
-    .btn:hover{background:var(--color-background-secondary)}
-    .btn-add{background:#1D9E75;color:#fff;border-color:#1D9E75}
-    .btn-add:hover{background:#0F6E56;border-color:#0F6E56}
-    .list-header{display:grid;grid-template-columns:90px 1fr 80px 90px 36px;gap:8px;padding:6px 8px;font-size:12px;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:4px}
-    .list-item{display:grid;grid-template-columns:90px 1fr 80px 90px 36px;gap:8px;align-items:center;padding:8px;border-radius:var(--border-radius-md);font-size:14px;margin-bottom:4px;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary)}
-    .list-item:hover{background:var(--color-background-secondary)}
-    .badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:500}
-    .badge.income{background:#E1F5EE;color:#0F6E56}
-    .badge.expense{background:#FCEBEB;color:#A32D2D}
-    .amount.income{color:#1D9E75;font-weight:500}
-    .amount.expense{color:#E24B4A;font-weight:500}
-    .del-btn{width:28px;height:28px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);background:transparent;color:var(--color-text-secondary);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px}
-    .del-btn:hover{background:#FCEBEB;color:#E24B4A;border-color:#F09595}
-    .empty{text-align:center;padding:2rem;color:var(--color-text-secondary);font-size:14px}
-    .filter-row{display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap}
-    .filter-btn{height:30px;padding:0 12px;border:0.5px solid var(--color-border-secondary);border-radius:999px;background:var(--color-background-primary);color:var(--color-text-secondary);font-size:13px;cursor:pointer}
-    .filter-btn.active{background:var(--color-text-primary);color:var(--color-background-primary);border-color:var(--color-text-primary)}
-    #inp-date{min-width:120px;max-width:120px;}
-    #inp-memo{min-width:160px;}
-    .info-section{display:flex;gap:40px;flex-wrap:wrap;margin-top:30px;padding-top:24px;border-top:0.5px solid var(--color-border-tertiary);}
-    .info-block{flex:1;min-width:200px;}
-    .info-block h2{font-size:15px;margin-bottom:8px;}
-    .info-block p,.info-block li{font-size:13px;color:var(--color-text-secondary);line-height:1.7;}
-    .info-block ul{padding-left:16px;margin-bottom:12px;}
-    .site-footer{margin-top:30px;padding:20px 0;text-align:center;border-top:0.5px solid var(--color-border-tertiary);}
-    .site-footer a{font-size:12px;color:var(--color-text-secondary);text-decoration:none;margin:0 8px;}
-    .site-footer a:hover{color:var(--color-text-primary);}
-    .month-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:8px 12px;}
-    .month-nav-btn{width:32px;height:32px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-    .month-nav-btn:hover{background:var(--color-border-secondary);}
-    .month-label{font-size:15px;font-weight:600;color:var(--color-text-primary);}
-    .month-today-btn{font-size:12px;color:#1D9E75;border:0.5px solid #1D9E75;border-radius:999px;padding:3px 10px;background:transparent;cursor:pointer;}
-    .month-today-btn:hover{background:#E1F5EE;}
-    .chart-section{margin-bottom:1.5rem;display:flex;flex-direction:column;align-items:center;}
-    .chart-inner{display:flex;flex-direction:column;align-items:center;gap:16px;}
-    .chart-wrap{position:relative;width:140px;height:140px;flex-shrink:0;}
-    .chart-wrap canvas{width:140px !important;height:140px !important;}
-    .chart-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;}
-    .chart-center-label{font-size:11px;color:var(--color-text-secondary);}
-    .chart-center-value{font-size:14px;font-weight:600;color:#E24B4A;}
-    .chart-legend{display:flex;flex-direction:column;gap:6px;min-width:200px;}
-    .legend-item{display:flex;align-items:center;gap:8px;font-size:13px;}
-    .legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
-    .legend-name{flex:1;color:var(--color-text-primary);}
-    .legend-amount{font-weight:500;color:var(--color-text-primary);}
-    .legend-pct{font-size:11px;color:var(--color-text-secondary);margin-left:4px;}
-    .chart-empty{text-align:center;padding:1.5rem;color:var(--color-text-secondary);font-size:13px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);width:100%;}
-    .budget-bar-wrap{height:6px;background:var(--color-border-secondary);border-radius:999px;margin-top:6px;overflow:hidden;}
-    .budget-bar{height:6px;border-radius:999px;transition:width .3s;}
-    .budget-bar.ok{background:#1D9E75;}
-    .budget-bar.warn{background:#F0A04B;}
-    .budget-bar.over{background:#E24B4A;}
-    .card-budget{font-size:11px;margin-top:4px;}
-    .card-budget.ok{color:#1D9E75;}
-    .card-budget.warn{color:#F0A04B;}
-    .card-budget.over{color:#E24B4A;font-weight:600;}
-    .alert-box{border-radius:var(--border-radius-md);padding:10px 14px;font-size:13px;margin-bottom:12px;display:flex;align-items:flex-start;gap:8px;}
-    .alert-box.warn{background:#FFF8E1;border:0.5px solid #F0A04B;color:#7a5000;}
-    .alert-box.over{background:#FEECEC;border:0.5px solid #E24B4A;color:#7a1a1a;}
-    .alert-icon{font-size:16px;flex-shrink:0;}
-    .budget-panel{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:14px 16px;margin-bottom:1.2rem;}
-    .budget-panel-header{display:flex;align-items:center;justify-content:space-between;}
-    .budget-panel-title{font-size:13px;font-weight:600;color:var(--color-text-secondary);cursor:pointer;}
-    .budget-panel-toggle{font-size:12px;color:#1D9E75;cursor:pointer;}
-    .budget-panel-body{margin-top:12px;display:none;}
-    .budget-panel-body.open{display:block;}
-    .budget-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
-    .budget-row label{font-size:13px;color:var(--color-text-primary);min-width:80px;}
-    .budget-row input{height:32px;padding:0 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);font-size:13px;width:130px;}
-    .budget-save-btn{height:32px;padding:0 14px;border:none;border-radius:var(--border-radius-md);background:#1D9E75;color:#fff;font-size:13px;font-weight:600;cursor:pointer;margin-top:4px;}
-    .budget-save-btn:hover{background:#0F6E56;}
-    .budget-clear-btn{height:32px;padding:0 14px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-secondary);font-size:13px;cursor:pointer;margin-top:4px;}
-    .budget-clear-btn:hover{background:var(--color-border-secondary);}
-    .fixed-notice{background:#E1F5EE;border-radius:var(--border-radius-md);padding:10px 14px;font-size:13px;color:#0F6E56;margin-bottom:12px;display:none;}
-    .csv-btn{height:28px;padding:0 10px;border:0.5px solid #1D9E75;border-radius:var(--border-radius-md);background:#1D9E75;color:#fff;font-size:12px;cursor:pointer;white-space:nowrap;font-weight:600;}
-    .csv-btn:hover{background:#0F6E56;}
-    .modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);display:none;align-items:center;justify-content:center;z-index:100;}
-    .modal-overlay.open{display:flex;}
-    .modal{background:var(--color-background-primary);border-radius:var(--border-radius-md);padding:24px;width:90%;max-width:340px;}
-    .modal-title{font-size:15px;font-weight:600;margin-bottom:16px;}
-    .modal-btn{display:block;width:100%;height:44px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-secondary);color:var(--color-text-primary);font-size:14px;cursor:pointer;margin-bottom:10px;text-align:left;padding:0 16px;}
-    .modal-btn:hover{background:var(--color-border-secondary);}
-    .modal-cancel{display:block;width:100%;height:36px;border:none;background:transparent;color:var(--color-text-secondary);font-size:13px;cursor:pointer;margin-top:4px;}
-    .modal-cancel:hover{color:var(--color-text-primary);}
-    @media(max-width:480px){
-      .list-header{grid-template-columns:72px 1fr 52px 72px 28px;font-size:11px;}
-      .list-item{grid-template-columns:72px 1fr 52px 72px 28px;font-size:12px;}
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9737379912380680" crossorigin="anonymous"></script>
 </head>
 <body>
+
+<button class="theme-btn" id="theme-btn" onclick="toggleTheme()">🌙</button>
 
 <div class="modal-overlay" id="csv-modal">
   <div class="modal">
@@ -133,10 +23,9 @@
 </div>
 
 <div class="wrap">
-
   <h1 style="font-size:20px;margin-bottom:8px;">シンプル家計簿アプリ</h1>
-  <p style="font-size:13px;color:#666;margin-bottom:8px;">ブラウザだけで簡単に収支管理ができる無料の家計簿ツールです。</p>
-  <p style="font-size:12px;color:#666;margin-bottom:20px;">※データはブラウザ内に保存されます（外部送信なし）</p>
+  <p style="font-size:13px;color:var(--color-text-secondary);margin-bottom:8px;">ブラウザだけで簡単に収支管理ができる無料の家計簿ツールです。</p>
+  <p style="font-size:12px;color:var(--color-text-secondary);margin-bottom:20px;">※データはブラウザ内に保存されます（外部送信なし）</p>
 
   <div class="fixed-notice" id="fixed-notice"></div>
 
@@ -244,6 +133,7 @@
         <li>固定費の自動追加</li>
         <li>CSVエクスポート</li>
         <li>カテゴリの追加・編集・削除</li>
+        <li>ダークモード対応</li>
         <li>データはブラウザに保存</li>
       </ul>
       <h2>こんな人におすすめ</h2>
@@ -262,117 +152,113 @@
     <a href="about.html">このアプリについて</a>
     <a href="privacy.html">プライバシーポリシー</a>
   </div>
-
 </div>
 
 <script>
-const DEFAULT_CATS = ['食費','交通費','光熱費','娯楽','医療','給与','その他'];
-const CAT_COLORS = {
-  '食費':'#FF6B6B','交通費':'#4ECDC4','光熱費':'#FFD93D',
-  '娯楽':'#6C63FF','医療':'#FF9F43','給与':'#1D9E75','その他':'#A0AEC0',
-};
-const COLOR_POOL = ['#FF6B6B','#4ECDC4','#FFD93D','#6C63FF','#FF9F43','#1D9E75','#A0AEC0','#F06292','#4DB6AC','#FFB74D'];
-function getCatColor(cat, index){
-  return CAT_COLORS[cat] || COLOR_POOL[index % COLOR_POOL.length];
-}
+const DEFAULT_CATS=['食費','交通費','光熱費','娯楽','医療','給与','その他'];
+const CAT_COLORS={'食費':'#FF6B6B','交通費':'#4ECDC4','光熱費':'#FFD93D','娯楽':'#6C63FF','医療':'#FF9F43','給与':'#1D9E75','その他':'#A0AEC0'};
+const COLOR_POOL=['#FF6B6B','#4ECDC4','#FFD93D','#6C63FF','#FF9F43','#1D9E75','#A0AEC0','#F06292','#4DB6AC','#FFB74D'];
+function getCatColor(cat,index){return CAT_COLORS[cat]||COLOR_POOL[index%COLOR_POOL.length];}
 
-// カテゴリをlocalStorageから取得
-let catsData = JSON.parse(localStorage.getItem('kakeibo_cats') || 'null');
-if(!catsData){
-  catsData = DEFAULT_CATS.map(name => ({ id: Date.now() + Math.random(), name, isDefault: true }));
-  localStorage.setItem('kakeibo_cats', JSON.stringify(catsData));
-}
-// カテゴリ名の配列を取得
-function getCatNames(){ return catsData.map(c => c.name); }
-
-// カテゴリセレクトを動的に生成
+let catsData=JSON.parse(localStorage.getItem('kakeibo_cats')||'null');
+if(!catsData){catsData=DEFAULT_CATS.map(name=>({id:Date.now()+Math.random(),name,isDefault:true}));localStorage.setItem('kakeibo_cats',JSON.stringify(catsData));}
+function getCatNames(){return catsData.map(c=>c.name);}
 function renderCatSelect(){
-  const sel = document.getElementById('inp-cat');
-  sel.innerHTML = getCatNames().map(name => `<option value="${name}">${name}</option>`).join('');
+  document.getElementById('inp-cat').innerHTML=getCatNames().map(name=>`<option value="${name}">${name}</option>`).join('');
 }
 
-let items      = JSON.parse(localStorage.getItem('kakeibo')||'[]');
-let budgets    = JSON.parse(localStorage.getItem('kakeibo_budgets')||'{}');
-let fixedCosts = JSON.parse(localStorage.getItem('kakeibo_fixed')||'[]');
+let items=JSON.parse(localStorage.getItem('kakeibo')||'[]');
+let budgets=JSON.parse(localStorage.getItem('kakeibo_budgets')||'{}');
+let fixedCosts=JSON.parse(localStorage.getItem('kakeibo_fixed')||'[]');
+let filter='all';
+const today=new Date();
+let currentYear=today.getFullYear();
+let currentMonth=today.getMonth()+1;
+document.getElementById('inp-date').value=today.toISOString().split('T')[0];
 
-let filter = 'all';
-const today = new Date();
-let currentYear  = today.getFullYear();
-let currentMonth = today.getMonth() + 1;
+function save(){localStorage.setItem('kakeibo',JSON.stringify(items));}
+function saveBudgetData(){localStorage.setItem('kakeibo_budgets',JSON.stringify(budgets));}
+function fmt(n){return '¥'+Number(n).toLocaleString('ja-JP');}
 
-document.getElementById('inp-date').value = today.toISOString().split('T')[0];
+/* ── ダークモード ── */
+function applyTheme(theme){
+  const html=document.documentElement,btn=document.getElementById('theme-btn');
+  html.classList.remove('dark','light');
+  if(theme==='dark'){html.classList.add('dark');btn.textContent='☀️';}
+  else if(theme==='light'){html.classList.add('light');btn.textContent='🌙';}
+  else{btn.textContent=window.matchMedia('(prefers-color-scheme:dark)').matches?'☀️':'🌙';}
+}
+function toggleTheme(){
+  const isDark=document.documentElement.classList.contains('dark')||
+    (!document.documentElement.classList.contains('light')&&window.matchMedia('(prefers-color-scheme:dark)').matches);
+  const next=isDark?'light':'dark';
+  localStorage.setItem('theme',next);
+  applyTheme(next);
+  render();
+}
+applyTheme(localStorage.getItem('theme')||'auto');
 
-function save(){ localStorage.setItem('kakeibo', JSON.stringify(items)); }
-function saveBudgetData(){ localStorage.setItem('kakeibo_budgets', JSON.stringify(budgets)); }
-function fmt(n){ return '¥'+Number(n).toLocaleString('ja-JP'); }
-
-/* ── CSVエクスポート ── */
-function openModal(){ document.getElementById('csv-modal').classList.add('open'); }
-function closeModal(){ document.getElementById('csv-modal').classList.remove('open'); }
+/* ── CSV ── */
+function openModal(){document.getElementById('csv-modal').classList.add('open');}
+function closeModal(){document.getElementById('csv-modal').classList.remove('open');}
 function exportCSV(type){
-  const target = type === 'month' ? getMonthItems() : items;
-  const filename = type === 'month' ? `家計簿_${currentYear}年${currentMonth}月.csv` : `家計簿_全データ.csv`;
-  if(target.length === 0){ alert('エクスポートするデータがありません。'); closeModal(); return; }
-  const headers = ['日付', 'メモ', 'カテゴリ', '種別', '金額', '固定費'];
-  const rows = target.map(i => [i.date, i.memo, i.cat, i.type==='income'?'収入':'支出', i.amount, i.isFixed?'〇':'']);
-  const csv = [headers, ...rows].map(row => row.map(cell => `"${String(cell).replace(/"/g,'""')}"`).join(',')).join('\n');
-  const blob = new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = filename; a.click();
+  const target=type==='month'?getMonthItems():items;
+  const filename=type==='month'?`家計簿_${currentYear}年${currentMonth}月.csv`:`家計簿_全データ.csv`;
+  if(target.length===0){alert('エクスポートするデータがありません。');closeModal();return;}
+  const headers=['日付','メモ','カテゴリ','種別','金額','固定費'];
+  const rows=target.map(i=>[i.date,i.memo,i.cat,i.type==='income'?'収入':'支出',i.amount,i.isFixed?'〇':'']);
+  const csv=[headers,...rows].map(row=>row.map(cell=>`"${String(cell).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download=filename;a.click();
   URL.revokeObjectURL(url);
   closeModal();
 }
 
-/* ── 固定費の自動追加 ── */
+/* ── 固定費 ── */
 function applyFixedCosts(){
-  if(fixedCosts.length===0) return;
-  const now=new Date();
-  const year=now.getFullYear(), month=now.getMonth()+1, todayDay=now.getDate();
+  if(fixedCosts.length===0)return;
+  const now=new Date(),year=now.getFullYear(),month=now.getMonth()+1,todayDay=now.getDate();
   const added=[];
   fixedCosts.forEach(f=>{
-    if(todayDay<f.day) return;
+    if(todayDay<f.day)return;
     const dateStr=`${year}-${String(month).padStart(2,'0')}-${String(f.day).padStart(2,'0')}`;
     const alreadyAdded=items.some(i=>i.date===dateStr&&i.memo===f.name&&i.cat===f.cat&&i.amount===f.amount&&i.type===f.type&&i.isFixed===true);
-    if(!alreadyAdded){ items.unshift({id:Date.now()+Math.random(),date:dateStr,memo:f.name,cat:f.cat,amount:f.amount,type:f.type,isFixed:true}); added.push(f.name); }
+    if(!alreadyAdded){items.unshift({id:Date.now()+Math.random(),date:dateStr,memo:f.name,cat:f.cat,amount:f.amount,type:f.type,isFixed:true});added.push(f.name);}
   });
   if(added.length>0){
     save();
     const notice=document.getElementById('fixed-notice');
     notice.textContent=`✅ 固定費を自動追加しました：${added.join('・')}`;
     notice.style.display='block';
-    setTimeout(()=>{ notice.style.display='none'; },4000);
+    setTimeout(()=>{notice.style.display='none';},4000);
   }
 }
 
 /* ── 月ナビ ── */
-function updateMonthLabel(){ document.getElementById('month-label').textContent=`${currentYear}年${currentMonth}月`; }
+function updateMonthLabel(){document.getElementById('month-label').textContent=`${currentYear}年${currentMonth}月`;}
 function changeMonth(diff){
   currentMonth+=diff;
   if(currentMonth>12){currentMonth=1;currentYear++;}
   if(currentMonth<1){currentMonth=12;currentYear--;}
-  updateMonthLabel(); render();
+  updateMonthLabel();render();
 }
-function goToToday(){
-  const n=new Date(); currentYear=n.getFullYear(); currentMonth=n.getMonth()+1;
-  updateMonthLabel(); render();
-}
+function goToToday(){const n=new Date();currentYear=n.getFullYear();currentMonth=n.getMonth()+1;updateMonthLabel();render();}
 function getMonthItems(){
-  return items.filter(i=>{ const d=new Date(i.date); return d.getFullYear()===currentYear&&d.getMonth()+1===currentMonth; });
+  return items.filter(i=>{const d=new Date(i.date);return d.getFullYear()===currentYear&&d.getMonth()+1===currentMonth;});
 }
 
-/* ── 予算パネル ── */
+/* ── 予算 ── */
 function toggleBudgetPanel(){
-  const body=document.getElementById('budget-panel-body');
-  const label=document.getElementById('budget-toggle-label');
+  const body=document.getElementById('budget-panel-body'),label=document.getElementById('budget-toggle-label');
   const isOpen=body.classList.toggle('open');
   label.textContent=isOpen?'閉じる ▲':'開く ▼';
-  if(isOpen) renderBudgetInputs();
+  if(isOpen)renderBudgetInputs();
 }
 function renderBudgetInputs(){
   document.getElementById('budget-total-input').value=budgets.total||'';
-  const catRows=document.getElementById('budget-cat-rows');
-  catRows.innerHTML=getCatNames().map(cat=>`
+  document.getElementById('budget-cat-rows').innerHTML=getCatNames().map(cat=>`
     <div class="budget-row">
       <label>${cat}</label>
       <input type="number" id="bcat-${cat}" placeholder="未設定" min="0" value="${(budgets.cats&&budgets.cats[cat])||''}">
@@ -383,41 +269,35 @@ function renderBudgetInputs(){
 function saveBudget(){
   const total=parseInt(document.getElementById('budget-total-input').value)||null;
   const cats={};
-  getCatNames().forEach(cat=>{ const v=parseInt(document.getElementById('bcat-'+cat).value)||null; if(v) cats[cat]=v; });
-  budgets={total,cats}; saveBudgetData(); toggleBudgetPanel(); render();
+  getCatNames().forEach(cat=>{const v=parseInt(document.getElementById('bcat-'+cat).value)||null;if(v)cats[cat]=v;});
+  budgets={total,cats};saveBudgetData();toggleBudgetPanel();render();
 }
-function clearBudget(){ budgets={}; saveBudgetData(); renderBudgetInputs(); render(); }
+function clearBudget(){budgets={};saveBudgetData();renderBudgetInputs();render();}
 
-/* ── 予算バー・アラート ── */
 function renderBudgetUI(monthItems){
   const expense=monthItems.filter(i=>i.type==='expense').reduce((s,i)=>s+i.amount,0);
   const totalBudget=budgets.total||null;
-  const barWrap=document.getElementById('budget-total-bar-wrap');
-  const barEl=document.getElementById('budget-total-bar');
-  const labelEl=document.getElementById('budget-total-label');
+  const barWrap=document.getElementById('budget-total-bar-wrap'),barEl=document.getElementById('budget-total-bar'),labelEl=document.getElementById('budget-total-label');
   if(totalBudget){
-    const pct=Math.min(expense/totalBudget*100,100);
-    const remaining=totalBudget-expense;
+    const pct=Math.min(expense/totalBudget*100,100),remaining=totalBudget-expense;
     const status=pct>=100?'over':pct>=80?'warn':'ok';
-    barWrap.style.display='block'; barEl.style.width=pct+'%'; barEl.className='budget-bar '+status;
+    barWrap.style.display='block';barEl.style.width=pct+'%';barEl.className='budget-bar '+status;
     labelEl.className='card-budget '+status;
     labelEl.textContent=remaining>=0?`残り ${fmt(remaining)} / ${fmt(totalBudget)}`:`超過 ${fmt(-remaining)} ⚠️`;
-  } else { barWrap.style.display='none'; labelEl.textContent=''; }
+  }else{barWrap.style.display='none';labelEl.textContent='';}
   const alerts=[];
-  if(totalBudget&&expense>totalBudget) alerts.push({type:'over',msg:`今月の支出が予算を超過しています（${fmt(expense)} / ${fmt(totalBudget)}）`});
-  else if(totalBudget&&expense/totalBudget>=0.8) alerts.push({type:'warn',msg:`今月の支出が予算の80%を超えました（残り ${fmt(totalBudget-expense)}）`});
+  if(totalBudget&&expense>totalBudget)alerts.push({type:'over',msg:`今月の支出が予算を超過しています（${fmt(expense)} / ${fmt(totalBudget)}）`});
+  else if(totalBudget&&expense/totalBudget>=0.8)alerts.push({type:'warn',msg:`今月の支出が予算の80%を超えました（残り ${fmt(totalBudget-expense)}）`});
   if(budgets.cats){
     const catExp={};
-    monthItems.filter(i=>i.type==='expense').forEach(i=>{ catExp[i.cat]=(catExp[i.cat]||0)+i.amount; });
+    monthItems.filter(i=>i.type==='expense').forEach(i=>{catExp[i.cat]=(catExp[i.cat]||0)+i.amount;});
     Object.entries(budgets.cats).forEach(([cat,budget])=>{
       const exp=catExp[cat]||0;
-      if(exp>budget) alerts.push({type:'over',msg:`${cat}が予算を超過しています（${fmt(exp)} / ${fmt(budget)}）`});
-      else if(exp/budget>=0.8) alerts.push({type:'warn',msg:`${cat}が予算の80%を超えました（残り ${fmt(budget-exp)}）`});
+      if(exp>budget)alerts.push({type:'over',msg:`${cat}が予算を超過しています（${fmt(exp)} / ${fmt(budget)}）`});
+      else if(exp/budget>=0.8)alerts.push({type:'warn',msg:`${cat}が予算の80%を超えました（残り ${fmt(budget-exp)}）`});
     });
   }
-  document.getElementById('alert-area').innerHTML=alerts.map(a=>`
-    <div class="alert-box ${a.type}"><span class="alert-icon">${a.type==='over'?'🔴':'⚠️'}</span><span>${a.msg}</span></div>
-  `).join('');
+  document.getElementById('alert-area').innerHTML=alerts.map(a=>`<div class="alert-box ${a.type}"><span class="alert-icon">${a.type==='over'?'🔴':'⚠️'}</span><span>${a.msg}</span></div>`).join('');
 }
 
 /* ── 円グラフ ── */
@@ -425,10 +305,11 @@ function renderChart(monthItems){
   const chartArea=document.getElementById('chart-area');
   const expenses=monthItems.filter(i=>i.type==='expense');
   const total=expenses.reduce((s,i)=>s+i.amount,0);
-  if(total===0){ chartArea.innerHTML='<div class="chart-empty">支出データがありません</div>'; return; }
+  if(total===0){chartArea.innerHTML='<div class="chart-empty">支出データがありません</div>';return;}
   const catMap={};
-  expenses.forEach(i=>{ catMap[i.cat]=(catMap[i.cat]||0)+i.amount; });
+  expenses.forEach(i=>{catMap[i.cat]=(catMap[i.cat]||0)+i.amount;});
   const cats=Object.entries(catMap).sort((a,b)=>b[1]-a[1]);
+  const bgColor=getComputedStyle(document.documentElement).getPropertyValue('--color-background-primary').trim();
   chartArea.innerHTML=`
     <div class="chart-inner">
       <div class="chart-wrap">
@@ -449,49 +330,35 @@ function renderChart(monthItems){
       <span class="legend-pct">${Math.round(amt/total*100)}%</span>
     </div>
   `).join('');
-  const canvas=document.getElementById('pie-canvas');
-  const ctx=canvas.getContext('2d');
+  const canvas=document.getElementById('pie-canvas'),ctx=canvas.getContext('2d');
   const cx=70,cy=70,r=60,innerR=36;
   let startAngle=-Math.PI/2;
   cats.forEach(([cat,amt],i)=>{
     const slice=(amt/total)*2*Math.PI;
-    ctx.beginPath();ctx.moveTo(cx,cy);
-    ctx.arc(cx,cy,r,startAngle,startAngle+slice);
-    ctx.closePath();ctx.fillStyle=getCatColor(cat,i);ctx.fill();
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,startAngle,startAngle+slice);ctx.closePath();ctx.fillStyle=getCatColor(cat,i);ctx.fill();
     startAngle+=slice;
   });
-  ctx.beginPath();ctx.arc(cx,cy,innerR,0,2*Math.PI);
-  ctx.fillStyle='#ffffff';ctx.fill();
+  ctx.beginPath();ctx.arc(cx,cy,innerR,0,2*Math.PI);ctx.fillStyle=bgColor||'#ffffff';ctx.fill();
 }
 
-/* ── データ追加・削除 ── */
+/* ── データ操作 ── */
 function addItem(){
-  const date=document.getElementById('inp-date').value;
-  const memo=document.getElementById('inp-memo').value.trim();
-  const cat=document.getElementById('inp-cat').value;
-  const amount=parseInt(document.getElementById('inp-amount').value);
+  const date=document.getElementById('inp-date').value,memo=document.getElementById('inp-memo').value.trim();
+  const cat=document.getElementById('inp-cat').value,amount=parseInt(document.getElementById('inp-amount').value);
   const type=document.getElementById('inp-type').value;
   if(!date||!amount||amount<=0){
     document.getElementById('inp-amount').style.boxShadow='0 0 0 2px #E24B4A';
-    setTimeout(()=>document.getElementById('inp-amount').style.boxShadow='',1500);
-    return;
+    setTimeout(()=>document.getElementById('inp-amount').style.boxShadow='',1500);return;
   }
-  const inputDate=new Date(date);
-  currentYear=inputDate.getFullYear(); currentMonth=inputDate.getMonth()+1;
+  const inputDate=new Date(date);currentYear=inputDate.getFullYear();currentMonth=inputDate.getMonth()+1;
   items.unshift({id:Date.now(),date,memo:memo||cat,cat,amount,type});
-  save();
-  document.getElementById('inp-memo').value='';
-  document.getElementById('inp-amount').value='';
-  updateMonthLabel(); render();
+  save();document.getElementById('inp-memo').value='';document.getElementById('inp-amount').value='';
+  updateMonthLabel();render();
 }
-function deleteItem(id){ items=items.filter(i=>i.id!==id); save(); render(); }
-function setFilter(f,el){
-  filter=f;
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  el.classList.add('active'); render();
-}
+function deleteItem(id){items=items.filter(i=>i.id!==id);save();render();}
+function setFilter(f,el){filter=f;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');render();}
 
-/* ── メイン描画 ── */
+/* ── 描画 ── */
 function render(){
   const monthItems=getMonthItems();
   const filtered=filter==='all'?monthItems:monthItems.filter(i=>i.type===filter);
@@ -501,14 +368,11 @@ function render(){
   document.getElementById('total-income').textContent=fmt(income);
   document.getElementById('total-expense').textContent=fmt(expense);
   const balEl=document.getElementById('total-balance');
-  balEl.textContent=fmt(balance);
-  balEl.style.color=balance>=0?'#1D9E75':'#E24B4A';
-  const expCount=monthItems.filter(i=>i.type==='expense').length;
-  document.getElementById('num-of-expenditures').textContent=expCount;
-  renderBudgetUI(monthItems);
-  renderChart(monthItems);
+  balEl.textContent=fmt(balance);balEl.style.color=balance>=0?'#1D9E75':'#E24B4A';
+  document.getElementById('num-of-expenditures').textContent=monthItems.filter(i=>i.type==='expense').length;
+  renderBudgetUI(monthItems);renderChart(monthItems);
   const list=document.getElementById('list');
-  if(filtered.length===0){ list.innerHTML='<div class="empty">この月のデータはありません。</div>'; return; }
+  if(filtered.length===0){list.innerHTML='<div class="empty">この月のデータはありません。</div>';return;}
   list.innerHTML=filtered.map(i=>`
     <div class="list-item">
       <span style="font-size:13px;color:var(--color-text-secondary)">${i.date}</span>
@@ -524,10 +388,7 @@ function render(){
   `).join('');
 }
 
-renderCatSelect();
-applyFixedCosts();
-updateMonthLabel();
-render();
+renderCatSelect();applyFixedCosts();updateMonthLabel();render();
 </script>
 </body>
 </html>
