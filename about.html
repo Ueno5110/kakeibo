@@ -3,9 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>このアプリについて｜シンプル家計簿アプリ</title>
-  <meta name="description" content="シンプル家計簿アプリの開発背景・特徴・開発者についてのご紹介です。">
+  <title>このアプリについて｜シンプル家計簿アプリ｜無料のブラウザ家計管理ツール</title>
+  <meta name="description" content="シンプル家計簿アプリの開発背景・こだわり・開発者プロフィールを紹介。インストール不要・登録不要・完全無料のブラウザ型家計管理ツールです。">
   <link rel="stylesheet" href="style.css">
+  <style>
+    .about-section{margin-bottom:40px;}
+    .about-section h2{font-size:18px;font-weight:700;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--color-green);}
+    .about-section h3{font-size:15px;font-weight:600;margin:16px 0 8px;}
+    .about-section p{font-size:14px;color:var(--color-text-secondary);line-height:1.8;margin-bottom:12px;}
+    .about-section ul{padding-left:20px;margin-bottom:12px;}
+    .about-section li{font-size:14px;color:var(--color-text-secondary);line-height:1.8;margin-bottom:4px;}
+    .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0;}
+    .feature-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:16px;}
+    .feature-card .icon{font-size:28px;margin-bottom:8px;}
+    .feature-card h4{font-size:14px;font-weight:600;margin-bottom:6px;}
+    .feature-card p{font-size:13px;color:var(--color-text-secondary);margin:0;line-height:1.6;}
+    .history-item{display:flex;gap:16px;margin-bottom:20px;padding-bottom:20px;border-bottom:0.5px solid var(--color-border-tertiary);}
+    .history-item:last-child{border-bottom:none;}
+    .history-date{font-size:12px;color:var(--color-text-secondary);min-width:80px;padding-top:2px;}
+    .history-content h4{font-size:14px;font-weight:600;margin-bottom:4px;}
+    .history-content p{font-size:13px;color:var(--color-text-secondary);margin:0;line-height:1.6;}
+    .profile-section{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:24px;margin-bottom:20px;}
+    .profile-header{display:flex;gap:20px;align-items:flex-start;margin-bottom:16px;flex-wrap:wrap;}
+    .profile-img{width:80px;height:80px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+    .profile-info h3{font-size:16px;font-weight:700;margin-bottom:4px;}
+    .profile-info .tag{display:inline-block;background:#E1F5EE;color:#0F6E56;font-size:11px;padding:2px 8px;border-radius:999px;margin-right:4px;margin-bottom:4px;}
+    .profile-bio{font-size:14px;color:var(--color-text-secondary);line-height:1.8;margin-bottom:16px;}
+    .profile-links{display:flex;gap:12px;flex-wrap:wrap;}
+    .profile-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--color-green);text-decoration:none;font-weight:600;}
+    .profile-link:hover{opacity:.8;}
+    .compare-table{width:100%;border-collapse:collapse;margin:16px 0;}
+    .compare-table th{background:var(--color-background-secondary);padding:10px 14px;font-size:13px;font-weight:600;text-align:left;border-bottom:1px solid var(--color-border-secondary);}
+    .compare-table td{padding:10px 14px;font-size:13px;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary);}
+    .compare-table tr:last-child td{border-bottom:none;}
+    .check{color:var(--color-green);font-weight:700;}
+    .cross{color:#E24B4A;}
+    .tip-box{background:#E1F5EE;border-left:4px solid var(--color-green);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;}
+    .tip-box p{color:#0F6E56;margin:0;font-size:13px;}
+  </style>
 </head>
 <body>
 <button class="theme-btn" id="theme-btn" onclick="toggleTheme()">🌙</button>
@@ -22,47 +57,236 @@
 
 <div class="wrap">
   <div class="page-title">このアプリについて</div>
-  <div class="page-desc">シンプル家計簿アプリの開発背景と特徴をご紹介します。</div>
+  <div class="page-desc">シンプル家計簿アプリの開発背景・特徴・開発者について紹介します。</div>
 
-  <div class="section">
-    <h2>アプリの特徴</h2>
+  <!-- アプリの特徴 -->
+  <div class="about-section">
+    <h2>シンプル家計簿アプリとは</h2>
+    <p>シンプル家計簿アプリは、ブラウザだけで使える無料の家計管理ツールです。インストール不要・登録不要で、URLを開くだけで今すぐ使い始められます。</p>
+    <p>「難しい操作なしに、毎日の収支をサッと記録したい」という方のために設計しました。シンプルさを大切にしながら、実際に使っていて不便に感じた機能を少しずつ追加して現在の形になっています。</p>
+
     <div class="feature-grid">
       <div class="feature-card">
-        <div class="feature-icon">⚡</div>
-        <div class="feature-title">インストール不要</div>
-        <div class="feature-desc">ブラウザを開くだけですぐ使えます。</div>
+        <div class="icon">⚡</div>
+        <h4>インストール不要</h4>
+        <p>アプリのダウンロードは不要。ブラウザを開くだけですぐ使えます。</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">📱</div>
-        <div class="feature-title">スマホ・PC対応</div>
-        <div class="feature-desc">どこからでも快適に使えます。</div>
+        <div class="icon">🔒</div>
+        <h4>プライバシー重視</h4>
+        <p>データはすべてブラウザ内に保存。外部サーバーへの送信は一切ありません。</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">🔒</div>
-        <div class="feature-title">データは端末内に保存</div>
-        <div class="feature-desc">入力したデータは外部に送信されません。</div>
+        <div class="icon">📱</div>
+        <h4>スマホ・PC対応</h4>
+        <p>iPhone・Android・PCどこからでも快適に使えます。</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">🆓</div>
-        <div class="feature-title">完全無料</div>
-        <div class="feature-desc">登録不要・完全無料でご利用いただけます。</div>
+        <div class="icon">🆓</div>
+        <h4>完全無料</h4>
+        <p>登録不要・完全無料でご利用いただけます。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🌙</div>
+        <h4>ダークモード</h4>
+        <p>ブラウザ設定への自動連動と手動切り替えの両方に対応。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">📥</div>
+        <h4>データ持ち出し</h4>
+        <p>CSVエクスポートでExcelやスプレッドシートでも活用できます。</p>
       </div>
     </div>
   </div>
 
-  <div class="section">
+  <!-- 他のアプリとの比較 -->
+  <div class="about-section">
+    <h2>他の家計管理ツールとの違い</h2>
+    <p>世の中には多くの家計管理アプリがありますが、このアプリは「シンプルさ」と「プライバシー」を最優先に設計しています。</p>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>比較項目</th>
+          <th>このアプリ</th>
+          <th>一般的な家計アプリ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>登録・ログイン</td>
+          <td><span class="check">✓ 不要</span></td>
+          <td><span class="cross">✗ 必要なことが多い</span></td>
+        </tr>
+        <tr>
+          <td>インストール</td>
+          <td><span class="check">✓ 不要（ブラウザで動く）</span></td>
+          <td><span class="cross">✗ 必要なことが多い</span></td>
+        </tr>
+        <tr>
+          <td>データの送信</td>
+          <td><span class="check">✓ 外部送信なし</span></td>
+          <td><span class="cross">✗ サーバーに送信される</span></td>
+        </tr>
+        <tr>
+          <td>料金</td>
+          <td><span class="check">✓ 完全無料</span></td>
+          <td>無料〜月額数百円</td>
+        </tr>
+        <tr>
+          <td>銀行口座連携</td>
+          <td>なし（手動入力）</td>
+          <td>対応しているものも多い</td>
+        </tr>
+        <tr>
+          <td>CSVエクスポート</td>
+          <td><span class="check">✓ 対応</span></td>
+          <td>有料プランのみが多い</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="tip-box">
+      <p>💡 銀行口座の自動連携は不要で、シンプルに手入力で管理したい方に特におすすめです。</p>
+    </div>
+  </div>
+
+  <!-- 機能一覧 -->
+  <div class="about-section">
+    <h2>主な機能</h2>
+
+    <h3>📅 月別収支管理</h3>
+    <p>収入・支出を記録して月ごとに集計します。‹ › ボタンで過去の月もいつでも確認できます。残高はリアルタイムで自動計算されます。</p>
+
+    <h3>🥧 カテゴリ別円グラフ</h3>
+    <p>支出をカテゴリ別に集計してドーナツ型の円グラフで表示します。食費・娯楽費・光熱費など、何にどのくらいお金を使っているかが一目でわかります。</p>
+
+    <h3>🎯 予算設定・超過アラート</h3>
+    <p>月全体とカテゴリ別に予算を設定できます。80%超過で黄色の警告、100%超過で赤のアラートが表示されます。予算設定は任意なので設定しなくても問題ありません。</p>
+
+    <h3>🔁 固定費の自動追加</h3>
+    <p>家賃・光熱費・サブスクなど毎月発生する固定費を登録しておくと、指定した日付に自動で記録されます。毎月の手入力の手間が省けます。</p>
+
+    <h3>🏷️ カテゴリのカスタマイズ</h3>
+    <p>デフォルトの7カテゴリを自分好みに変更できます。「美容費」「教育費」「ペット費」など、生活スタイルに合ったカテゴリで管理できます。</p>
+
+    <h3>📥 CSVエクスポート</h3>
+    <p>今月のデータまたは全データをCSVファイルでダウンロードできます。ExcelやGoogleスプレッドシートで詳細な分析ができます。</p>
+
+    <h3>🌙 ダークモード</h3>
+    <p>ブラウザの設定に自動連動するダークモードと、手動で切り替えるトグルボタンの両方に対応しています。設定はブラウザに保存されます。</p>
+  </div>
+
+  <!-- 開発経緯 -->
+  <div class="about-section">
+    <h2>開発の経緯</h2>
+    <p>このアプリはAI（Claude）を活用して開発しました。プログラミング初心者でも、AIを使えば実用的なWebアプリを作って公開できることを実証したくて作り始めました。</p>
+    <p>最初は収支を記録するだけのシンプルなアプリでしたが、実際に自分で使いながら「ここが不便だな」と感じた部分を一つずつ改善していき、現在の形になっています。</p>
+    <p>「0円で作って0円で公開する」というコンセプトのもと、開発費用・公開費用ともに完全無料で運営しています。</p>
+  </div>
+
+  <!-- 更新履歴 -->
+  <div class="about-section">
+    <h2>更新履歴</h2>
+
+    <div class="history-item">
+      <div class="history-date">2026年5月</div>
+      <div class="history-content">
+        <h4>ダークモード対応・CSS共通化</h4>
+        <p>ブラウザ設定への自動連動と手動切り替えの両方に対応したダークモードを実装。全ページのCSSをstyle.cssに共通化しました。</p>
+      </div>
+    </div>
+
+    <div class="history-item">
+      <div class="history-date">2026年5月</div>
+      <div class="history-content">
+        <h4>カテゴリのカスタマイズ機能を追加</h4>
+        <p>カテゴリの追加・編集・削除ができるカテゴリ設定画面を新規追加しました。</p>
+      </div>
+    </div>
+
+    <div class="history-item">
+      <div class="history-date">2026年5月</div>
+      <div class="history-content">
+        <h4>CSVエクスポート機能を追加</h4>
+        <p>今月のデータまたは全データをCSVファイルでダウンロードできるようになりました。</p>
+      </div>
+    </div>
+
+    <div class="history-item">
+      <div class="history-date">2026年5月</div>
+      <div class="history-content">
+        <h4>固定費の自動追加機能を追加</h4>
+        <p>毎月発生する固定費を登録して自動記録できる固定費設定画面を追加しました。</p>
+      </div>
+    </div>
+
+    <div class="history-item">
+      <div class="history-date">2026年4月</div>
+      <div class="history-content">
+        <h4>予算設定・超過アラート機能を追加</h4>
+        <p>月全体・カテゴリ別の予算設定と、超過時のアラート表示機能を追加しました。</p>
+      </div>
+    </div>
+
+    <div class="history-item">
+      <div class="history-date">2026年4月</div>
+      <div class="history-content">
+        <h4>カテゴリ別円グラフを追加</h4>
+        <p>支出をカテゴリ別に集計してドーナツ型の円グラフで表示する機能を追加しました。</p>
+      </div>
+    </div>
+
+    <div class="history-item">
+      <div class="history-date">2026年4月</div>
+      <div class="history-content">
+        <h4>月別切り替え機能を追加</h4>
+        <p>‹ › ボタンで月を切り替えて収支を確認できる機能を追加しました。</p>
+      </div>
+    </div>
+
+    <div class="history-item">
+      <div class="history-date">2026年4月</div>
+      <div class="history-content">
+        <h4>初版公開</h4>
+        <p>収支記録・カテゴリ分類・残高自動計算の基本機能でリリースしました。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 開発者 -->
+  <div class="about-section">
     <h2>開発者について</h2>
-    <div class="profile-box">
-      <img src="inu.png" alt="プロフィール画像" style="width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;">
-      <div>
-        <div class="profile-name">元学習塾教材開発→新人プログラマー</div>
-        <div class="profile-bio">「わからない人の気持ち」がわかるつもりで、初心者目線のアプリ作りを目指しています。AIを活用しながら0円でWebアプリを公開するのが最近のテーマ。</div>
-        <a href="https://qiita.com/Tueno-96" target="_blank" rel="noopener"
-          style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:13px;color:#55C500;text-decoration:none;font-weight:600;">
-          📗 Qiitaプロフィールを見る →
+    <div class="profile-section">
+      <div class="profile-header">
+        <img src="inu.png" alt="プロフィール画像" class="profile-img">
+        <div class="profile-info">
+          <h3>元学習塾教材開発 → 新人プログラマー</h3>
+          <div>
+            <span class="tag">個人開発</span>
+            <span class="tag">AI活用</span>
+            <span class="tag">初心者目線</span>
+          </div>
+        </div>
+      </div>
+      <div class="profile-bio">
+        学習塾の教材開発からプログラマーに転職しました。「わからない人の気持ちがわかる」元先生として、初心者でも迷わず使えるシンプルなアプリ作りを目指しています。
+        <br><br>
+        AIを活用しながら0円でWebアプリを作って公開することをテーマに、開発の記録をQiitaとnoteで発信しています。「技術がなくてもアイデアと行動力があれば作れる」を実証中です。
+      </div>
+      <div class="profile-links">
+        <a href="https://qiita.com/Tueno-96" target="_blank" rel="noopener" class="profile-link">
+          📗 Qiitaプロフィール
         </a>
       </div>
     </div>
+  </div>
+
+  <!-- お問い合わせ -->
+  <div class="about-section">
+    <h2>ご意見・ご要望</h2>
+    <p>機能のご要望・不具合のご報告・使い方のご質問などは、<a href="https://qiita.com/Tueno-96" target="_blank" rel="noopener" style="color:var(--color-green)">Qiitaのプロフィールページ</a>からお気軽にご連絡ください。</p>
+    <p>皆様のフィードバックをもとに、より使いやすいアプリに改善していきます。</p>
   </div>
 
   <a class="back-btn" href="index.html">← アプリに戻る</a>

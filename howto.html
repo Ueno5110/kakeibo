@@ -3,9 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>使い方｜シンプル家計簿アプリ</title>
-  <meta name="description" content="シンプル家計簿アプリの使い方を詳しく解説します。">
+  <title>使い方｜シンプル家計簿アプリ｜無料のブラウザ家計管理ツール</title>
+  <meta name="description" content="シンプル家計簿アプリの使い方を詳しく解説。収入・支出の入力方法から月別管理、予算設定、固定費の自動追加、CSVエクスポートまで。インストール不要で今すぐ使えます。">
   <link rel="stylesheet" href="style.css">
+  <style>
+    .howto-section{margin-bottom:40px;}
+    .howto-section h2{font-size:18px;font-weight:700;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--color-green);}
+    .howto-section h3{font-size:15px;font-weight:600;margin:16px 0 8px;color:var(--color-text-primary);}
+    .howto-section p{font-size:14px;color:var(--color-text-secondary);line-height:1.8;margin-bottom:12px;}
+    .howto-section ul,
+    .howto-section ol{padding-left:20px;margin-bottom:12px;}
+    .howto-section li{font-size:14px;color:var(--color-text-secondary);line-height:1.8;margin-bottom:4px;}
+    .tip-box{background:#E1F5EE;border-left:4px solid var(--color-green);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;}
+    .tip-box p{color:#0F6E56;margin:0;font-size:13px;}
+    .warn-note{background:#FFF8E1;border-left:4px solid #F0A04B;border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;}
+    .warn-note p{color:#7a5000;margin:0;font-size:13px;}
+    .feature-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0;}
+    .feature-item{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:14px;}
+    .feature-item .icon{font-size:24px;margin-bottom:8px;}
+    .feature-item h4{font-size:13px;font-weight:600;margin-bottom:4px;}
+    .feature-item p{font-size:12px;color:var(--color-text-secondary);margin:0;}
+    .faq-item{border-bottom:0.5px solid var(--color-border-tertiary);padding:16px 0;}
+    .faq-item:last-child{border-bottom:none;}
+    .faq-q{font-size:14px;font-weight:600;margin-bottom:8px;color:var(--color-text-primary);}
+    .faq-q::before{content:"Q. ";color:var(--color-green);}
+    .faq-a{font-size:14px;color:var(--color-text-secondary);line-height:1.7;}
+    .faq-a::before{content:"A. ";color:var(--color-text-secondary);font-weight:600;}
+    .use-case{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:16px;margin-bottom:12px;}
+    .use-case h4{font-size:14px;font-weight:600;margin-bottom:8px;}
+    .use-case p{font-size:13px;color:var(--color-text-secondary);margin:0;line-height:1.7;}
+  </style>
 </head>
 <body>
 <button class="theme-btn" id="theme-btn" onclick="toggleTheme()">🌙</button>
@@ -21,85 +48,257 @@
 </header>
 
 <div class="wrap">
-  <div class="page-title">使い方</div>
-  <div class="page-desc">シンプルな操作で収支管理ができます。順番に確認してみてください。</div>
+  <div class="page-title">使い方ガイド</div>
+  <div class="page-desc">シンプル家計簿アプリの全機能を詳しく解説します。初めての方もすぐに使い始められます。</div>
 
-  <div class="step">
-    <div class="step-num">1</div>
-    <div>
-      <div class="step-title">収支を入力する</div>
-      <div class="step-desc">画面上部のフォームに以下を入力して「追加」を押します。</div>
-      <ul class="step-list">
-        <li>日付：記録したい日を選択</li>
-        <li>メモ：内容（例：スーパー、ランチ）</li>
-        <li>カテゴリ：食費・交通費などを選択</li>
-        <li>金額：半角数字で入力</li>
-        <li>種別：「支出」または「収入」を選択</li>
-      </ul>
+  <!-- 特徴一覧 -->
+  <div class="howto-section">
+    <h2>このアプリでできること</h2>
+    <div class="feature-list">
+      <div class="feature-item">
+        <div class="icon">📅</div>
+        <h4>月別収支管理</h4>
+        <p>月ごとに収入・支出を記録して残高を自動計算します。</p>
+      </div>
+      <div class="feature-item">
+        <div class="icon">🥧</div>
+        <h4>円グラフで可視化</h4>
+        <p>カテゴリ別の支出割合をグラフで一目確認できます。</p>
+      </div>
+      <div class="feature-item">
+        <div class="icon">🎯</div>
+        <h4>予算管理</h4>
+        <p>月全体・カテゴリ別に予算を設定して使いすぎを防ぎます。</p>
+      </div>
+      <div class="feature-item">
+        <div class="icon">🔁</div>
+        <h4>固定費の自動追加</h4>
+        <p>家賃・光熱費など毎月の固定費を自動で記録します。</p>
+      </div>
+      <div class="feature-item">
+        <div class="icon">📥</div>
+        <h4>CSVエクスポート</h4>
+        <p>データをExcelやGoogleスプレッドシートで活用できます。</p>
+      </div>
+      <div class="feature-item">
+        <div class="icon">🌙</div>
+        <h4>ダークモード</h4>
+        <p>目に優しいダークモードに切り替えられます。</p>
+      </div>
     </div>
   </div>
-  <hr class="divider">
 
-  <div class="step">
-    <div class="step-num">2</div>
-    <div>
-      <div class="step-title">月別に収支を確認する</div>
-      <div class="step-desc">‹ › ボタンで月を切り替えられます。収入合計・支出合計・残高がその月だけで自動計算されます。</div>
+  <!-- 基本操作 -->
+  <div class="howto-section">
+    <h2>基本操作：収支を記録する</h2>
+    <p>画面上部のフォームから収入・支出を入力します。以下の項目を入力して「追加」ボタンを押してください。</p>
+
+    <h3>① 日付を選ぶ</h3>
+    <p>記録したい日付を選択します。デフォルトで今日の日付が入力されています。過去の日付を選ぶと、その月の画面に自動的に切り替わります。</p>
+
+    <h3>② メモを入力する（任意）</h3>
+    <p>「スーパー」「ランチ」「Netflix」など、何に使ったかのメモを入力します。省略した場合はカテゴリ名が自動で入ります。</p>
+
+    <h3>③ カテゴリを選ぶ</h3>
+    <p>食費・交通費・光熱費・娯楽・医療・給与・その他から選択します。カテゴリ設定画面から自分好みのカテゴリに変更することもできます。</p>
+
+    <h3>④ 金額を入力する</h3>
+    <p>半角数字で金額を入力します。入力した金額は自動的に収入合計・支出合計・残高に反映されます。</p>
+
+    <h3>⑤ 種別を選ぶ</h3>
+    <p>「支出」または「収入」を選択します。給与などの収入を記録するときは「収入」を選んでください。</p>
+
+    <div class="tip-box">
+      <p>💡 <strong>ヒント：</strong>キーボードのEnterキーでも「追加」ボタンと同じ操作ができます。</p>
     </div>
   </div>
-  <hr class="divider">
 
-  <div class="step">
-    <div class="step-num">3</div>
-    <div>
-      <div class="step-title">円グラフで支出の内訳を確認する</div>
-      <div class="step-desc">カテゴリ別の支出割合が円グラフで表示されます。何にお金を使っているか一目でわかります。</div>
+  <!-- 月別管理 -->
+  <div class="howto-section">
+    <h2>月別に収支を確認する</h2>
+    <p>「家計簿」タイトルの下にある月ナビゲーションで表示する月を切り替えられます。</p>
+
+    <h3>月の切り替え方</h3>
+    <ul>
+      <li>「‹」ボタン：前の月に移動</li>
+      <li>「›」ボタン：次の月に移動</li>
+      <li>「今月に戻る」ボタン：今月の表示に戻る</li>
+    </ul>
+
+    <p>収入合計・支出合計・残高は表示中の月のデータのみで自動計算されます。過去の月のデータもいつでも確認できます。</p>
+
+    <div class="tip-box">
+      <p>💡 <strong>ヒント：</strong>データを入力した日付が別の月であれば、自動的にその月に切り替わります。</p>
     </div>
   </div>
-  <hr class="divider">
 
-  <div class="step">
-    <div class="step-num">4</div>
-    <div>
-      <div class="step-title">予算を設定する（任意）</div>
-      <div class="step-desc">「⚙️ 予算設定」から月全体・カテゴリ別の予算を設定できます。80%超過で警告、100%超過でアラートが表示されます。</div>
+  <!-- 円グラフ -->
+  <div class="howto-section">
+    <h2>円グラフで支出を分析する</h2>
+    <p>月ごとの支出データをカテゴリ別に集計して円グラフで表示します。何にどのくらいお金を使っているかが一目でわかります。</p>
+
+    <h3>グラフの見方</h3>
+    <ul>
+      <li>グラフ中央：その月の支出合計金額</li>
+      <li>グラフの各セクション：カテゴリ別の割合</li>
+      <li>凡例（グラフの下）：カテゴリ名・金額・割合</li>
+    </ul>
+
+    <p>支出データがない月は「支出データがありません」と表示されます。収入のみのデータはグラフに含まれません。</p>
+  </div>
+
+  <!-- 予算設定 -->
+  <div class="howto-section">
+    <h2>予算を設定して使いすぎを防ぐ</h2>
+    <p>「⚙️ 予算設定（任意）」をクリックするとパネルが開きます。月全体の予算とカテゴリ別の予算を個別に設定できます。</p>
+
+    <h3>予算設定の手順</h3>
+    <ol>
+      <li>「⚙️ 予算設定（任意）」をクリックしてパネルを開く</li>
+      <li>「月全体」に月の予算総額を入力（例：150000）</li>
+      <li>カテゴリ別に個別の予算を入力（設定したいカテゴリだけでOK）</li>
+      <li>「保存」ボタンをクリック</li>
+    </ol>
+
+    <h3>アラートの表示条件</h3>
+    <ul>
+      <li>⚠️ 予算の80%を超えると黄色の警告が表示</li>
+      <li>🔴 予算の100%を超えると赤のアラートが表示</li>
+    </ul>
+
+    <p>予算は任意設定です。設定しない場合はアラートは表示されません。「クリア」ボタンで予算設定をリセットできます。</p>
+
+    <div class="tip-box">
+      <p>💡 <strong>活用例：</strong>食費は月30,000円まで、娯楽費は月10,000円までと設定しておくと、使いすぎを早めに気づけます。</p>
     </div>
   </div>
-  <hr class="divider">
 
-  <div class="step">
-    <div class="step-num">5</div>
-    <div>
-      <div class="step-title">固定費を自動追加する</div>
-      <div class="step-desc">「🔁 固定費設定」から毎月自動で追加される固定費を登録できます。家賃・光熱費・サブスクなどを登録しておくと便利です。</div>
+  <!-- 固定費 -->
+  <div class="howto-section">
+    <h2>固定費を自動で記録する</h2>
+    <p>毎月発生する家賃・光熱費・サブスクリプションなどを「固定費」として登録しておくと、指定した日にアプリを開いたとき自動で記録されます。</p>
+
+    <h3>固定費の登録手順</h3>
+    <ol>
+      <li>「🔁 固定費設定」リンクをクリック</li>
+      <li>名前（例：家賃）を入力</li>
+      <li>カテゴリ・金額・種別・毎月何日を設定</li>
+      <li>「追加」ボタンをクリック</li>
+    </ol>
+
+    <h3>自動追加のタイミング</h3>
+    <p>指定した日付以降にアプリを開いたとき、当月分がまだ記録されていなければ自動で追加されます。例えば「毎月25日」に設定していて、27日に初めてアプリを開いた場合でも25日付けで自動追加されます。</p>
+
+    <div class="warn-note">
+      <p>⚠️ 同じ固定費が重複して追加されることはありません。当月分がすでに記録済みの場合はスキップされます。</p>
     </div>
   </div>
-  <hr class="divider">
 
-  <div class="step">
-    <div class="step-num">6</div>
-    <div>
-      <div class="step-title">カテゴリをカスタマイズする</div>
-      <div class="step-desc">「🏷️ カテゴリ設定」からカテゴリの追加・編集・削除ができます。自分の生活に合ったカテゴリで管理できます。</div>
+  <!-- カテゴリ -->
+  <div class="howto-section">
+    <h2>カテゴリをカスタマイズする</h2>
+    <p>デフォルトの7カテゴリ（食費・交通費・光熱費・娯楽・医療・給与・その他）を自分好みに変更できます。</p>
+
+    <h3>カテゴリの操作</h3>
+    <ul>
+      <li><strong>追加：</strong>新しいカテゴリ名を入力して「追加」ボタンを押す</li>
+      <li><strong>編集：</strong>「編集」ボタンを押してカテゴリ名を変更</li>
+      <li><strong>削除：</strong>「削除」ボタンで不要なカテゴリを削除</li>
+    </ul>
+
+    <div class="tip-box">
+      <p>💡 カテゴリを削除しても、そのカテゴリで記録済みのデータは消えません。</p>
     </div>
   </div>
-  <hr class="divider">
 
-  <div class="step">
-    <div class="step-num">7</div>
-    <div>
-      <div class="step-title">CSVでエクスポートする</div>
-      <div class="step-desc">「📥 CSV」ボタンから今月または全データをCSVファイルでダウンロードできます。ExcelやGoogleスプレッドシートで開けます。</div>
+  <!-- CSV -->
+  <div class="howto-section">
+    <h2>データをCSVでエクスポートする</h2>
+    <p>月ナビの横にある「📥 CSV」ボタンからデータをCSVファイルとしてダウンロードできます。</p>
+
+    <h3>エクスポートの種類</h3>
+    <ul>
+      <li><strong>今月のデータ：</strong>現在表示中の月のデータのみ出力</li>
+      <li><strong>全データ：</strong>全期間のデータを一括出力</li>
+    </ul>
+
+    <p>CSVファイルはExcel・Googleスプレッドシートで開けます。日付・メモ・カテゴリ・種別・金額・固定費フラグが含まれます。BOM付きUTF-8形式なのでWindowsのExcelでも文字化けしません。</p>
+  </div>
+
+  <!-- データ保存 -->
+  <div class="howto-section">
+    <h2>データの保存について</h2>
+    <p>入力したデータはすべてお使いのブラウザ内（localStorage）に自動保存されます。外部サーバーへの送信は一切ありません。</p>
+
+    <div class="warn-note">
+      <p>⚠️ <strong>注意：</strong>ブラウザのキャッシュ・履歴・Cookieを削除するとデータも消えます。大切なデータは定期的にCSVエクスポートでバックアップしてください。</p>
+    </div>
+
+    <h3>データが消える主なケース</h3>
+    <ul>
+      <li>ブラウザの「閲覧履歴の削除」でキャッシュを消したとき</li>
+      <li>プライベートブラウジング（シークレットモード）で使用したとき</li>
+      <li>別のブラウザやデバイスで開いたとき（データは共有されません）</li>
+    </ul>
+  </div>
+
+  <!-- 活用例 -->
+  <div class="howto-section">
+    <h2>活用シーン・使い方の例</h2>
+
+    <div class="use-case">
+      <h4>💼 一人暮らしの生活費管理</h4>
+      <p>家賃・光熱費・食費・通信費を固定費として登録しておき、毎月の変動費（外食・娯楽など）を手動で入力。月末に円グラフで支出の内訳を確認して、翌月の節約ポイントを把握します。</p>
+    </div>
+
+    <div class="use-case">
+      <h4>👨‍👩‍👧 家族の家計管理</h4>
+      <p>月全体の予算を設定して食費・娯楽費・教育費などカテゴリ別に予算を割り当て。超過アラートで使いすぎを早めに検知して家計の見直しに活用します。</p>
+    </div>
+
+    <div class="use-case">
+      <h4>📊 月次レポートの作成</h4>
+      <p>毎月末にCSVエクスポートして、Excelで年間の収支推移グラフを作成。年間の家計データを可視化して、節約目標の達成状況を管理します。</p>
+    </div>
+
+    <div class="use-case">
+      <h4>🎯 節約チャレンジ</h4>
+      <p>食費3万円・娯楽費1万円などカテゴリ別に予算を設定して節約チャレンジ。80%を超えると警告が出るので、月末に慌てずに済みます。</p>
     </div>
   </div>
-  <hr class="divider">
 
-  <div class="step">
-    <div class="step-num">8</div>
-    <div>
-      <div class="step-title">データの保存について</div>
-      <div class="step-desc">入力したデータはブラウザに自動保存されます。ページを閉じても次回開いたときに残っています。</div>
-      <div class="note-box">⚠️ ブラウザのキャッシュ・履歴を削除するとデータも消えます。また、別の端末とは共有されません。</div>
+  <!-- FAQ -->
+  <div class="howto-section">
+    <h2>よくある質問</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">登録・ログインは必要ですか？</div>
+      <div class="faq-a">不要です。ブラウザを開くだけですぐに使えます。メールアドレスや個人情報の入力は一切必要ありません。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">スマホでも使えますか？</div>
+      <div class="faq-a">はい、iPhoneのSafari・AndroidのChromeなど主要なブラウザで快適に使えます。ホーム画面に追加するとアプリのように使えます。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">データが消えてしまいました。復元できますか？</div>
+      <div class="faq-a">ブラウザのキャッシュを削除するとデータは復元できません。定期的にCSVエクスポートでバックアップを取ることをおすすめします。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">複数のデバイスでデータを共有できますか？</div>
+      <div class="faq-a">現在はブラウザ内にデータを保存しているため、デバイス間の同期には対応していません。CSVエクスポートで手動でデータを移行することができます。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">入力したデータは外部に送信されますか？</div>
+      <div class="faq-a">送信されません。すべてのデータはお使いのブラウザ内にのみ保存されます。詳しくはプライバシーポリシーをご確認ください。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">無料で使えますか？</div>
+      <div class="faq-a">完全無料です。登録不要・広告あり（Google AdSense）でご利用いただけます。</div>
     </div>
   </div>
 
