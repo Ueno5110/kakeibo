@@ -151,9 +151,14 @@
       }
 
       // カテゴリセレクトを動的生成
-      document.getElementById("inp-cat").innerHTML = getCatNames()
-        .map((name) => `<option value="${name}">${name}</option>`)
-        .join("");
+      const catSelect = document.getElementById("inp-cat");
+
+      getCatNames().forEach((name) => {
+        const option = document.createElement("option");
+        option.value = name;
+        option.textContent = name;
+        catSelect.appendChild(option);
+      });
 
       // 日付セレクトを生成（1〜28日）
       const daySelect = document.getElementById("inp-day");
@@ -185,8 +190,8 @@
           document.getElementById("inp-name").focus();
           return;
         }
-        if (!Number.isFinite(amount) || amount <= 0) {
-          alert("金額は1円以上の数値を入力してください。");
+        if (!Number.isInteger(amount) || amount <= 0) {
+          alert("金額は1円以上の整数を入力してください。");
           document.getElementById("inp-amount").focus();
           return;
         }
@@ -205,7 +210,7 @@
         saveFixed();
         renderList();
       }
-      function excapeHTML(value){
+      function escapeHTML(value){
         return String(value).replace(/[&<>"']/g,(char) =>{
           const entities = {
             "&": "&amp;",
