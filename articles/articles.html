@@ -1,0 +1,194 @@
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>家計管理に役立つ記事一覧｜カケレコ</title>
+    <meta
+      name="description"
+      content="家計簿の続け方や予算管理など、日々の家計管理に役立つ情報を紹介します。シンプルな家計簿アプリ「カケレコ」の記事一覧です。"
+    />
+
+    <link rel="stylesheet" href="../style.css" />
+
+    <style>
+      .articles-page h1 {
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 1.5;
+        margin-bottom: 12px;
+      }
+
+      .articles-intro {
+        font-size: 15px;
+        color: var(--color-text-secondary);
+        line-height: 1.9;
+        margin-bottom: 28px;
+      }
+
+      .article-list {
+        display: grid;
+        gap: 16px;
+      }
+
+      .article-card {
+        padding: 20px;
+        border: 1px solid var(--color-border);
+        border-radius: 12px;
+        background: var(--color-background);
+      }
+
+      .article-card h2 {
+        font-size: 18px;
+        line-height: 1.6;
+        margin: 0 0 10px;
+      }
+
+      .article-card h2 a {
+        color: var(--color-text);
+        text-decoration: none;
+      }
+
+      .article-card h2 a:hover {
+        color: var(--color-green);
+      }
+
+      .article-card .article-date {
+        font-size: 12px;
+        color: var(--color-text-secondary);
+        margin-bottom: 10px;
+      }
+
+      .article-card p {
+        font-size: 14px;
+        color: var(--color-text-secondary);
+        line-height: 1.8;
+        margin-bottom: 14px;
+      }
+
+      .article-card .article-link {
+        display: inline-block;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--color-green);
+        text-decoration: none;
+      }
+
+      .article-card .article-link:hover {
+        text-decoration: underline;
+      }
+
+      .articles-empty {
+        padding: 24px 16px;
+        border-radius: 8px;
+        background: var(--color-background-secondary);
+        color: var(--color-text-secondary);
+        text-align: center;
+        line-height: 1.8;
+      }
+
+      .articles-back {
+        margin-top: 28px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <button class="theme-btn" id="theme-btn" onclick="toggleTheme()">🌙</button>
+
+    <header>
+      <div class="header-inner">
+        <a class="logo" href="../index.html">📒 カケレコ</a>
+        <nav>
+          <a href="./articles.html">記事一覧</a>
+          <a href="../howto.html">使い方</a>
+          <a href="../about.html">about</a>
+          <a href="../privacy.html">プライバシー</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap articles-page">
+      <h1>家計管理に役立つ記事一覧</h1>
+
+      <p class="articles-intro">
+        家計簿の続け方や予算管理など、日々の家計管理に役立つ情報を紹介します。
+        自分に合った方法を見つけて、無理のない家計管理に役立ててください。
+      </p>
+
+      <section class="article-list" aria-label="記事一覧">
+        <article class="article-card">
+          <h2>
+            <a href="./kakeibo-tips.html">
+              家計簿が続かない人向け｜無理なく続ける5つのコツ
+            </a>
+          </h2>
+
+          <p class="article-date">公開日：公開日に変更してください</p>
+
+          <p>
+            家計簿を始めても長続きしない方に向けて、
+            記録の負担を減らし、無理なく習慣化するための5つのコツを紹介します。
+          </p>
+
+          <a class="article-link" href="./kakeibo-tips.html">
+            記事を読む →
+          </a>
+        </article>
+      </section>
+
+      <p class="articles-back">
+        <a class="back-btn" href="../index.html">← 家計簿トップへ戻る</a>
+      </p>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <a href="../index.html">ホーム</a>
+        <a href="./articles.html">記事一覧</a>
+        <a href="../howto.html">使い方</a>
+        <a href="../about.html">このアプリについて</a>
+        <a href="../privacy.html">プライバシーポリシー</a>
+      </div>
+    </footer>
+
+    <script>
+      function applyTheme(theme) {
+        const html = document.documentElement;
+        const btn = document.getElementById("theme-btn");
+
+        html.classList.remove("dark", "light");
+
+        if (theme === "dark") {
+          html.classList.add("dark");
+          btn.textContent = "☀️";
+        } else if (theme === "light") {
+          html.classList.add("light");
+          btn.textContent = "🌙";
+        } else {
+          btn.textContent = window.matchMedia(
+            "(prefers-color-scheme: dark)"
+          ).matches
+            ? "☀️"
+            : "🌙";
+        }
+      }
+
+      function toggleTheme() {
+        const isDark =
+          document.documentElement.classList.contains("dark") ||
+          (!document.documentElement.classList.contains("light") &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+        const next = isDark ? "light" : "dark";
+
+        localStorage.setItem("theme", next);
+        applyTheme(next);
+      }
+
+      applyTheme(localStorage.getItem("theme") || "auto");
+    </script>
+  </body>
+</html>
