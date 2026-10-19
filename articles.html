@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ここに記事タイトル｜カケレコ</title>
+    <meta name="description" content="この記事の要約を1〜2文。" />
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+      .article h1 {
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 1.4;
+        margin-bottom: 8px;
+      }
+      .article-date {
+        font-size: 12px;
+        color: var(--color-text-secondary);
+        margin-bottom: 24px;
+      }
+      .article h2 {
+        font-size: 17px;
+        font-weight: 700;
+        margin: 32px 0 12px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid var(--color-green);
+      }
+      .article p {
+        font-size: 15px;
+        color: var(--color-text-secondary);
+        line-height: 1.9;
+        margin-bottom: 16px;
+      }
+      .article ul,
+      .article ol {
+        padding-left: 1.4em;
+        margin-bottom: 16px;
+      }
+      .article li {
+        font-size: 15px;
+        color: var(--color-text-secondary);
+        line-height: 1.8;
+        margin-bottom: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="theme-btn" id="theme-btn" onclick="toggleTheme()">🌙</button>
+    <header>
+      <div class="header-inner">
+        <a class="logo" href="../index.html">📒 カケレコ</a>
+        <nav>
+          <a href="../articles.html">記事一覧</a>
+          <a href="../howto.html">使い方</a>
+          <a href="../about.html">about</a>
+          <a href="../privacy.html">プライバシー</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="wrap article">
+      <p class="article-date">2026年9月4日</p>
+      <h1>ここに記事タイトル</h1>
+
+      <p>リード文。この記事で何がわかるかを2〜3文。</p>
+
+      <h2>見出し</h2>
+      <p>本文をここに貼る。</p>
+
+      <p>
+        <a class="back-btn" href="../articles.html">← 記事一覧</a>
+      </p>
+    </div>
+
+    <footer>
+      <div class="footer-inner">
+        <a href="../index.html">ホーム</a>
+        <a href="../articles.html">記事一覧</a>
+        <a href="../howto.html">使い方</a>
+        <a href="../about.html">このアプリについて</a>
+        <a href="../privacy.html">プライバシーポリシー</a>
+      </div>
+    </footer>
+
+    <script>
+      function applyTheme(theme) {
+        const html = document.documentElement,
+          btn = document.getElementById("theme-btn");
+        html.classList.remove("dark", "light");
+        if (theme === "dark") {
+          html.classList.add("dark");
+          btn.textContent = "☀️";
+        } else if (theme === "light") {
+          html.classList.add("light");
+          btn.textContent = "🌙";
+        } else {
+          btn.textContent = window.matchMedia("(prefers-color-scheme:dark)")
+            .matches
+            ? "☀️"
+            : "🌙";
+        }
+      }
+      function toggleTheme() {
+        const isDark =
+          document.documentElement.classList.contains("dark") ||
+          (!document.documentElement.classList.contains("light") &&
+            window.matchMedia("(prefers-color-scheme:dark)").matches);
+        const next = isDark ? "light" : "dark";
+        localStorage.setItem("theme", next);
+        applyTheme(next);
+      }
+      applyTheme(localStorage.getItem("theme") || "auto");
+    </script>
+  </body>
+</html>

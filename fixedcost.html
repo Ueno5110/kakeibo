@@ -1,155 +1,245 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>固定費設定｜シンプル家計簿アプリ</title>
-  <meta name="description" content="毎月自動で記録される固定費を設定できます。">
-  <link rel="stylesheet" href="style.css">
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "wtdgqt05sb");
-</script>
-</head>
-<body>
-<button class="theme-btn" id="theme-btn" onclick="toggleTheme()">🌙</button>
-<header>
-  <div class="header-inner">
-    <a class="logo" href="index.html">📒 シンプル家計簿</a>
-    <nav>
-      <a href="howto.html">使い方</a>
-      <a href="about.html">about</a>
-      <a href="privacy.html">プライバシー</a>
-    </nav>
-  </div>
-</header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>固定費設定｜シンプル家計簿アプリ</title>
+    <meta
+      name="description"
+      content="毎月自動で記録される固定費を設定できます。"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "wtdgqt05sb");
+    </script>
+  </head>
+  <body>
+    <button class="theme-btn" id="theme-btn" onclick="toggleTheme()">🌙</button>
+    <header>
+      <div class="header-inner">
+        <a class="logo" href="index.html">📒 シンプル家計簿</a>
+        <nav>
+          <a href="articles.html">記事一覧</a>
+          <a href="howto.html">使い方</a>
+          <a href="about.html">about</a>
+          <a href="privacy.html">プライバシー</a>
+        </nav>
+      </div>
+    </header>
 
-<div class="wrap">
-  <div class="page-title">固定費設定</div>
-  <div class="page-desc">毎月自動で記録される固定費を登録できます。</div>
-  <div class="info-box">💡 指定した日付を過ぎてアプリを開いた場合も、当月分が未追加であれば自動で追加されます。</div>
+    <div class="wrap">
+      <div class="page-title">固定費設定</div>
+      <div class="page-desc">毎月自動で記録される固定費を登録できます。</div>
+      <div class="info-box">
+        💡 固定費は、設定した日付以降にアプリを開いたとき、
+        当月分が未記録であれば自動で追加されます。
+        例えば、毎月25日に設定した場合、27日にアプリを開くと
+        25日付けの記録が追加されます。
+      </div>
 
-  <div class="sub-card">
-    <div class="card-title">固定費を追加</div>
-    <div class="form-row" style="margin-bottom:8px;">
-      <input type="text" id="inp-name" placeholder="名前（例：家賃）" style="flex:2;">
-      <select id="inp-cat"></select>
+      <div class="sub-card">
+        <div class="card-title">固定費を追加</div>
+        <p class="page-desc">家賃やサブスクリプションなど、毎月繰り返し発生する収支を登録できます。名前・カテゴリ・金額・種別・追加する日を入力してください。</p>
+        <div class="form-row" style="margin-bottom: 8px">
+          <input
+            type="text"
+            id="inp-name"
+            placeholder="名前（例：家賃）"
+            style="flex: 2"
+          />
+          <select id="inp-cat"></select>
+        </div>
+        <div class="form-row">
+          <input type="number" id="inp-amount" placeholder="金額" min="1" step="1"/>
+          <select id="inp-type">
+            <option value="expense">支出</option>
+            <option value="income">収入</option>
+          </select>
+          <select id="inp-day"></select>
+          <button class="btn btn-add" onclick="addFixed()">追加</button>
+        </div>
+      </div>
+
+      <div class="sub-card">
+        <div class="card-title">登録済み固定費</div>
+        <p class="page-desc">
+          登録した固定費は一覧から確認できます。
+          不要になった固定費は、右端の「✕」ボタンから削除できます。
+          削除後は、今後の自動追加対象から外れます。
+        </p>
+        <div class="fixed-list-header">
+          <span>名前</span><span>カテゴリ</span
+          ><span style="text-align: center">毎月</span
+          ><span style="text-align: right">金額</span><span></span>
+        </div>
+        <div id="fixed-list"></div>
+      </div>
     </div>
-    <div class="form-row">
-      <input type="number" id="inp-amount" placeholder="金額" min="0">
-      <select id="inp-type">
-        <option value="expense">支出</option>
-        <option value="income">収入</option>
-      </select>
-      <select id="inp-day"></select>
-      <button class="btn btn-add" onclick="addFixed()">追加</button>
-    </div>
-  </div>
 
-  <div class="sub-card">
-    <div class="card-title">登録済み固定費</div>
-    <div class="fixed-list-header">
-      <span>名前</span><span>カテゴリ</span><span style="text-align:center">毎月</span><span style="text-align:right">金額</span><span></span>
-    </div>
-    <div id="fixed-list"></div>
-  </div>
-</div>
+    <footer>
+      <div class="footer-inner">
+        <a href="index.html">ホーム</a>
+        <a href="fixedcost.html">固定費設定</a>
+        <a href="category.html">カテゴリ設定</a>
+        <a href="howto.html">使い方</a>
+        <a href="about.html">このアプリについて</a>
+        <a href="articles.html">記事一覧</a>
+        <a href="privacy.html">プライバシーポリシー</a>
+      </div>
+    </footer>
 
-<footer>
-  <div class="footer-inner">
-    <a href="index.html">ホーム</a>
-    <a href="fixedcost.html">固定費設定</a>
-    <a href="category.html">カテゴリ設定</a>
-    <a href="howto.html">使い方</a>
-    <a href="about.html">このアプリについて</a>
-    <a href="privacy.html">プライバシーポリシー</a>
-  </div>
-</footer>
+    <script>
+      function applyTheme(theme) {
+        const html = document.documentElement,
+          btn = document.getElementById("theme-btn");
+        html.classList.remove("dark", "light");
+        if (theme === "dark") {
+          html.classList.add("dark");
+          btn.textContent = "☀️";
+        } else if (theme === "light") {
+          html.classList.add("light");
+          btn.textContent = "🌙";
+        } else {
+          btn.textContent = window.matchMedia("(prefers-color-scheme:dark)")
+            .matches
+            ? "☀️"
+            : "🌙";
+        }
+      }
+      function toggleTheme() {
+        const isDark =
+          document.documentElement.classList.contains("dark") ||
+          (!document.documentElement.classList.contains("light") &&
+            window.matchMedia("(prefers-color-scheme:dark)").matches);
+        const next = isDark ? "light" : "dark";
+        localStorage.setItem("theme", next);
+        applyTheme(next);
+      }
+      applyTheme(localStorage.getItem("theme") || "auto");
 
-<script>
-function applyTheme(theme){
-  const html=document.documentElement,btn=document.getElementById('theme-btn');
-  html.classList.remove('dark','light');
-  if(theme==='dark'){html.classList.add('dark');btn.textContent='☀️';}
-  else if(theme==='light'){html.classList.add('light');btn.textContent='🌙';}
-  else{btn.textContent=window.matchMedia('(prefers-color-scheme:dark)').matches?'☀️':'🌙';}
-}
-function toggleTheme(){
-  const isDark=document.documentElement.classList.contains('dark')||
-    (!document.documentElement.classList.contains('light')&&window.matchMedia('(prefers-color-scheme:dark)').matches);
-  const next=isDark?'light':'dark';
-  localStorage.setItem('theme',next);
-  applyTheme(next);
-}
-applyTheme(localStorage.getItem('theme')||'auto');
+      const DEFAULT_CATS = [
+        "食費",
+        "交通費",
+        "光熱費",
+        "娯楽",
+        "医療",
+        "給与",
+        "その他",
+      ];
+      let catsData = JSON.parse(localStorage.getItem("kakeibo_cats") || "null");
+      if (!catsData) {
+        catsData = DEFAULT_CATS.map((name) => ({
+          id: Date.now() + Math.random(),
+          name,
+          isDefault: true,
+        }));
+        localStorage.setItem("kakeibo_cats", JSON.stringify(catsData));
+      }
+      function getCatNames() {
+        return catsData.map((c) => c.name);
+      }
 
-const DEFAULT_CATS=['食費','交通費','光熱費','娯楽','医療','給与','その他'];
-let catsData=JSON.parse(localStorage.getItem('kakeibo_cats')||'null');
-if(!catsData){
-  catsData=DEFAULT_CATS.map(name=>({id:Date.now()+Math.random(),name,isDefault:true}));
-  localStorage.setItem('kakeibo_cats',JSON.stringify(catsData));
-}
-function getCatNames(){return catsData.map(c=>c.name);}
+      // カテゴリセレクトを動的生成
+      document.getElementById("inp-cat").innerHTML = getCatNames()
+        .map((name) => `<option value="${name}">${name}</option>`)
+        .join("");
 
-// カテゴリセレクトを動的生成
-document.getElementById('inp-cat').innerHTML=getCatNames().map(name=>`<option value="${name}">${name}</option>`).join('');
+      // 日付セレクトを生成（1〜28日）
+      const daySelect = document.getElementById("inp-day");
+      for (let d = 1; d <= 28; d++) {
+        const opt = document.createElement("option");
+        opt.value = d;
+        opt.textContent = `毎月${d}日`;
+        daySelect.appendChild(opt);
+      }
 
-// 日付セレクトを生成（1〜28日）
-const daySelect=document.getElementById('inp-day');
-for(let d=1;d<=28;d++){
-  const opt=document.createElement('option');
-  opt.value=d;opt.textContent=`毎月${d}日`;
-  daySelect.appendChild(opt);
-}
+      let fixedCosts = JSON.parse(
+        localStorage.getItem("kakeibo_fixed") || "[]",
+      );
+      function saveFixed() {
+        localStorage.setItem("kakeibo_fixed", JSON.stringify(fixedCosts));
+      }
+      function fmt(n) {
+        return "¥" + Number(n).toLocaleString("ja-JP");
+      }
 
-let fixedCosts=JSON.parse(localStorage.getItem('kakeibo_fixed')||'[]');
-function saveFixed(){localStorage.setItem('kakeibo_fixed',JSON.stringify(fixedCosts));}
-function fmt(n){return '¥'+Number(n).toLocaleString('ja-JP');}
+      function addFixed() {
+        const name = document.getElementById("inp-name").value.trim();
+        const cat = document.getElementById("inp-cat").value;
+        const amount = Number(document.getElementById("inp-amount").value);
+        const type = document.getElementById("inp-type").value;
+        const day = parseInt(document.getElementById("inp-day").value);
+        if (!name){
+          alert("固定費の名前を入力してください。");
+          document.getElementById("inp-name").focus();
+          return;
+        }
+        if (!Number.isFinite(amount) || amount <= 0) {
+          alert("金額は1円以上の数値を入力してください。");
+          document.getElementById("inp-amount").focus();
+          return;
+        }
+        fixedCosts.push({ id: Date.now(), name, cat, amount, type, day });
+        saveFixed();
+        document.getElementById("inp-name").value = "";
+        document.getElementById("inp-amount").value = "";
+        renderList();
+      }
 
-function addFixed(){
-  const name=document.getElementById('inp-name').value.trim();
-  const cat=document.getElementById('inp-cat').value;
-  const amount=parseInt(document.getElementById('inp-amount').value);
-  const type=document.getElementById('inp-type').value;
-  const day=parseInt(document.getElementById('inp-day').value);
-  if(!name||!amount||amount<=0){
-    document.getElementById('inp-amount').style.boxShadow='0 0 0 2px #E24B4A';
-    setTimeout(()=>document.getElementById('inp-amount').style.boxShadow='',1500);
-    return;
-  }
-  fixedCosts.push({id:Date.now(),name,cat,amount,type,day});
-  saveFixed();
-  document.getElementById('inp-name').value='';
-  document.getElementById('inp-amount').value='';
-  renderList();
-}
-
-function deleteFixed(id){
-  const f=fixedCosts.find(f=>f.id===id);
-  if(!f)return;
-  if(!confirm(`「${f.name}」を削除しますか？`))return;
-  fixedCosts=fixedCosts.filter(f=>f.id!==id);
-  saveFixed();renderList();
-}
-
-function renderList(){
-  const el=document.getElementById('fixed-list');
-  if(fixedCosts.length===0){el.innerHTML='<div class="empty">固定費が登録されていません。</div>';return;}
-  el.innerHTML=fixedCosts.map(f=>`
+      function deleteFixed(id) {
+        const f = fixedCosts.find((f) => f.id === id);
+        if (!f) return;
+        if (!confirm(`「${f.name}」を削除しますか？`)) return;
+        fixedCosts = fixedCosts.filter((f) => f.id !== id);
+        saveFixed();
+        renderList();
+      }
+      function excapeHTML(value){
+        return String(value).replace(/[&<>"']/g,(char) =>{
+          const entities = {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+          };
+          return entities[char];
+        });
+      }
+      function renderList() {
+        const el = document.getElementById("fixed-list");
+        if (fixedCosts.length === 0) {
+          el.innerHTML =
+            '<div class="empty">固定費が登録されていません。</div>';
+          return;
+        }
+        el.innerHTML = fixedCosts
+          .map(
+            (f) => `
     <div class="fixed-item">
-      <span style="font-weight:500">${f.name}<br><span style="font-size:12px;color:var(--color-text-secondary)">${f.type==='income'?'収入':'支出'}</span></span>
-      <span style="font-size:12px;color:var(--color-text-secondary)">${f.cat}</span>
+      <span style="font-weight:500">${escapeHTML(f.name)}<br><span style="font-size:12px;color:var(--color-text-secondary)">${f.type === "income" ? "収入" : "支出"}</span></span>
+      <span style="font-size:12px;color:var(--color-text-secondary)">${escapeHTML(f.cat)}</span>
       <span style="font-size:12px;color:var(--color-text-secondary);text-align:center">${f.day}日</span>
-      <span style="font-weight:500;text-align:right;color:${f.type==='income'?'#1D9E75':'#E24B4A'}">${fmt(f.amount)}</span>
+      <span style="font-weight:500;text-align:right;color:${f.type === "income" ? "#1D9E75" : "#E24B4A"}">${fmt(f.amount)}</span>
       <button class="del-btn" onclick="deleteFixed(${f.id})">✕</button>
     </div>
-  `).join('');
-}
+  `,
+          )
+          .join("");
+      }
 
-renderList();
-</script>
-</body>
+      renderList();
+    </script>
+  </body>
 </html>
